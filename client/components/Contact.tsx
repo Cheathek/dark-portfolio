@@ -2,8 +2,9 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { useToast } from '@/hooks/use-toast';
 import { motion } from 'framer-motion';
-import { Loader2, Phone, Mail, Map, Send, SquareArrowOutUpRight, SendHorizonal } from 'lucide-react';
+import { Loader2, Phone, Mail, Map, Send, SquareArrowOutUpRight, SendHorizonal, CheckCircle2, CircleX, Info } from 'lucide-react';
 
 export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -13,6 +14,7 @@ export default function Contact() {
     subject: '',
     message: ''
   });
+  const { toast } = useToast();
 
   // Contact data
   const contactInfo = [
@@ -54,8 +56,8 @@ export default function Contact() {
   };
 
   const sendToTelegram = async (data: typeof formData) => {
-    const BOT_TOKEN = '7762199917:'; // Replace with your bot token
-    const CHAT_ID = 'asdf'; // Replace with your chat ID
+    const BOT_TOKEN = '7762199917:AAFvdAJQZRrZm_ouEoHHDGxPPMr4lUT6T4'; // Replace with your bot token
+    const CHAT_ID = '5058242890'; // Replace with your chat ID
 
     const message = `🔔 *New Contact Form Submission*
 
@@ -81,7 +83,11 @@ ${data.message}
         })
       });
 
-      return response.ok;
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      return true;
     } catch (error) {
       console.error('Error sending to Telegram:', error);
       return false;
@@ -92,16 +98,52 @@ ${data.message}
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Send to Telegram
-    const success = await sendToTelegram(formData);
+    try {
+      // Send to Telegram
+      const success = await sendToTelegram(formData);
 
-    if (success) {
-      // Reset form on success
-      setFormData({ name: '', telegram: '', subject: '', message: '' });
-      // You could add a success toast notification here
+      if (success) {
+        // Show success toast
+        toast({
+          title: "Success!",
+          description: (
+            <div className="flex items-center gap-2">
+              <CheckCircle2 className="w-5 h-5 text-green-500" />
+              <span>Your message was sent.</span>
+            </div>
+          ),
+          duration: 6000,
+        });
+        // Reset form on success
+        setFormData({ name: '', telegram: '', subject: '', message: '' });
+      } else {
+        // Show error toast
+         toast({
+          title: "Error!",
+          description: (
+            <div className="flex items-center gap-2">
+              <CircleX className="w-5 h-5 text-red-500" />
+              <span>Something went wrong. Please try again or contact me directly via Telegram.</span>
+            </div>
+          ),
+          duration: 6000,
+        });
+      }
+    } catch (error) {
+      // Show error toast for unexpected errors
+       toast({
+          title: "Connection Error!",
+          description: (
+            <div className="flex items-center gap-2">
+              <Info className="w-5 h-5 text-yellow-500" />
+              <span>Unable to connect to server. Please check your internet connection and try again.</span>
+            </div>
+          ),
+          duration: 6000,
+        });
+    } finally {
+      setIsSubmitting(false);
     }
-
-    setIsSubmitting(false);
   };
 
   return (
@@ -203,7 +245,7 @@ ${data.message}
                     <p className="text-gray-300">Connected to Telegram for instant notifications</p>
                   </div>
 
-                  <div className="space-y-6">
+                  <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="grid md:grid-cols-2 gap-6">
                       <div className="space-y-3">
                         <label className="block text-white font-semibold text-sm uppercase tracking-wide">Full Name</label>
@@ -254,15 +296,10 @@ ${data.message}
                         placeholder="Tell me about your project, ideas, or just say hello..."
                       />
                     </div>
-                    {/* success or fail alert sending */}
 
                     <Button
                       type="submit"
                       disabled={isSubmitting}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleSubmit(e as any);
-                      }}
                       className="w-full h-14 bg-transparent border-2 text-white hover:bg-transparent font-semibold text-lg rounded-xl transition-all duration-300 hover:scale-[1.02] shadow-2xl hover:shadow-white/10"
                     >
                       {isSubmitting ? (
@@ -277,8 +314,7 @@ ${data.message}
                         </>
                       )}
                     </Button>
-
-                  </div>
+                  </form>
                 </div>
               </div>
             </div>
