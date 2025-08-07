@@ -56,7 +56,7 @@ export default function Contact() {
   };
 
   const sendToTelegram = async (data: typeof formData) => {
-    const BOT_TOKEN = '7762199917:AAFvdAJQZRrZm_ouEoHHDGxPPMr4lUT6T4'; // Replace with your bot token
+    const BOT_TOKEN = '7762199917:AAFvdAJQZRrZm_ouEoHHDGxPPMr4lUT6T4Y'; // Replace with your bot token
     const CHAT_ID = '5058242890'; // Replace with your chat ID
 
     const message = `🔔 *New Contact Form Submission*
