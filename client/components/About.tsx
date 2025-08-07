@@ -71,7 +71,7 @@ export default function About() {
                     <div className="w-1/5 h-full bg-gradient-to-r from-transparent via-white/10 to-transparent blur-sm" />
                   </motion.div>
                   <AvatarImage
-                    src="/image.gif"
+                    src="/profile.jpg"
                     alt="Profile"
                     className="object-cover"
                   />
@@ -80,7 +80,7 @@ export default function About() {
               {/* Name + Role + Company */}
               <div className="text-white space-y-1 mb-10">
                 <h3 className="text-2xl md:text-3xl font-semibold">
-                  Ryomen Sukuna
+                  Socheath Ek Mao
                 </h3>
                 <p className="text-lg font-semibold text-white/70">Full Stack Developer</p>
                 <p className="text-md text-cyan-500">Tech Company, Inc.</p>

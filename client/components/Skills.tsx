@@ -17,6 +17,8 @@ import {
   Canva,
   Laravel,
   PHP,
+  Jira,
+  Photoshop,
 } from "developer-icons";
 import { Terminal } from "lucide-react";
 
@@ -30,7 +32,6 @@ export default function Skills() {
     { name: "PHP", level: 80, icon: PHP, group: "Programming Languages" },
 
     { name: "React.js", level: 98, icon: React, group: "Frameworks & Libraries" },
-    { name: "Next.js", level: 92, icon: NextJs, group: "Frameworks & Libraries" },
     { name: "Vue.js", level: 70, icon: VueJs, group: "Frameworks & Libraries" },
     { name: "Bootstrap", level: 85, icon: Bootstrap5, group: "Frameworks & Libraries" },
     { name: "Tailwind CSS", level: 95, icon: TailwindCSS, group: "Frameworks & Libraries" },
@@ -41,6 +42,9 @@ export default function Skills() {
     { name: "Figma", level: 87, icon: Figma, group: "Tools & Platforms" },
     { name: "VS Code", level: 80, icon: VisualStudioCode, group: "Tools & Platforms" },
     { name: "Canva", level: 80, icon: Canva, group: "Tools & Platforms" },
+    { name: "Jira", level: 75, icon: Jira, group: "Tools & Platforms" },
+    // PhotoShop
+    { name: "PhotoShop", level: 25, icon: Photoshop, group: "Tools & Platforms" },
   ];
 
   const groups = ["Programming Languages", "Frameworks & Libraries", "Tools & Platforms"];

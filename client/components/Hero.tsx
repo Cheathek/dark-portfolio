@@ -109,9 +109,9 @@ export default function Hero() {
           </div>
 
           <h2 className="text-6xl sm:text-6xl md:text-8xl italic font-black text-white tracking-tight mb-4">
-            RYOMEN
+            SOCHEATH EK
             <motion.span className="block text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-300 to-white">
-              SUKUNA
+              MAO
             </motion.span>
           </h2>
 

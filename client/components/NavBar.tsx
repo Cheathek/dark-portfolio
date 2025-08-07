@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { motion } from "framer-motion";
-import { Link } from 'react-router-dom';
 import { BriefcaseBusiness, Code2, Home, Mail, Menu, MessageCircle, User2Icon, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -15,7 +14,7 @@ export function NavBar() {
       setIsScrolled(window.scrollY > 50);
 
       // Handle active section highlighting
-      const sections = ['hero', 'about', 'skills', 'projects', 'contact'];
+      const sections = ['hero', 'about', 'skills', 'experience', 'contact'];
       const scrollPosition = window.scrollY + 100;
 
       for (const section of sections) {
@@ -33,7 +32,7 @@ export function NavBar() {
     };
 
     window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Call once to set initial state
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -49,7 +48,7 @@ export function NavBar() {
     { id: 'hero', label: 'Home', icon: Home },
     { id: 'about', label: 'About', icon: User2Icon },
     { id: 'skills', label: 'Skills', icon: Code2 },
-    { id: 'projects', label: 'Experience', icon: BriefcaseBusiness },
+    { id: 'experience', label: 'Experience', icon: BriefcaseBusiness },
     { id: 'contact', label: 'Contact', icon: Mail },
   ];
 
@@ -70,7 +69,7 @@ export function NavBar() {
                 <Code2 className="w-8 h-8 group-hover:rotate-12 transition-transform duration-300" />
                 <div className="absolute inset-0 bg-cyan-400/20 rounded-full blur-lg group-hover:bg-cyan-400/40 transition-all duration-300"></div>
               </div>
-              <span className="hidden sm:block">Ryomen•Sukuna</span>
+              <span className="hidden sm:block">SocheathEk•Mao</span>
             </button>
 
             {/* Desktop Navigation */}
@@ -103,7 +102,6 @@ export function NavBar() {
                 </button>
               ))}
             </div>
-
             {/* Desktop CTA */}
             <div className="hidden lg:flex items-center space-x-4">
               <Button
@@ -113,9 +111,7 @@ export function NavBar() {
                 <MessageCircle className="h-5 w-5" />
                 Let's Talk
               </Button>
-
             </div>
-
             {/* Mobile Menu Button */}
             <div className="lg:hidden">
               <button

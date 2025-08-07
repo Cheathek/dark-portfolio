@@ -21,15 +21,15 @@ export default function Contact() {
     {
       icon: Phone,
       label: 'Phone',
-      value: '+855 12 345 678',
-      href: 'tel:+85512345678',
+      value: '+855 86 397 836',
+      href: 'tel:+85586397836',
       description: 'Call me directly'
     },
     {
       icon: Send,
       label: 'Telegram',
-      value: '@alexanderdev',
-      href: 'https://t.me/alexanderdev',
+      value: '@cheatzx',
+      href: 'https://t.me/cheatzx',
       description: 'Quick chat on Telegram'
     },
     {
@@ -42,7 +42,7 @@ export default function Contact() {
     {
       icon: Map,
       label: 'Location',
-      value: '123 Tech Street, City, Country',
+      value: 'Sangkat Toeuk Thla, Khan Sen Sok, Phnom Penh, Cambodia.',
       href: '#',
       description: 'Available for meetings'
     }
@@ -118,7 +118,7 @@ ${data.message}
         setFormData({ name: '', telegram: '', subject: '', message: '' });
       } else {
         // Show error toast
-         toast({
+        toast({
           title: "Error!",
           description: (
             <div className="flex items-center gap-2">
@@ -131,16 +131,16 @@ ${data.message}
       }
     } catch (error) {
       // Show error toast for unexpected errors
-       toast({
-          title: "Connection Error!",
-          description: (
-            <div className="flex items-center gap-2">
-              <Info className="w-5 h-5 text-yellow-500" />
-              <span>Unable to connect to server. Please check your internet connection and try again.</span>
-            </div>
-          ),
-          duration: 6000,
-        });
+      toast({
+        title: "Connection Error!",
+        description: (
+          <div className="flex items-center gap-2">
+            <Info className="w-5 h-5 text-yellow-500" />
+            <span>Unable to connect to server. Please check your internet connection and try again.</span>
+          </div>
+        ),
+        duration: 6000,
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -259,7 +259,7 @@ ${data.message}
                         />
                       </div>
                       <div className="space-y-3">
-                        <label className="block text-white font-semibold text-sm uppercase tracking-wide">Telegram Handle</label>
+                        <label className="block text-white font-semibold text-sm uppercase tracking-wide">Telegram</label>
                         <Input
                           name="telegram"
                           type="text"
