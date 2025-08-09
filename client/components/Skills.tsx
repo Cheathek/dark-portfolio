@@ -1,25 +1,5 @@
 import { motion } from "framer-motion";
-import {
-  TypeScript,
-  NextJs,
-  Python,
-  React,
-  Figma,
-  GitHubLight,
-  WordPress,
-  JavaScript,
-  HTML5,
-  CSS3,
-  Bootstrap5,
-  TailwindCSS,
-  VueJs,
-  VisualStudioCode,
-  Canva,
-  Laravel,
-  PHP,
-  Jira,
-  Photoshop,
-} from "developer-icons";
+import { TypeScript, Python, React, Figma, GitHubLight, WordPress, JavaScript, HTML5, CSS3, Bootstrap5, TailwindCSS, VueJs, VisualStudioCode, Canva, Laravel, PHP, Jira, Photoshop } from "developer-icons";
 import { Terminal } from "lucide-react";
 
 export default function Skills() {
@@ -43,7 +23,6 @@ export default function Skills() {
     { name: "VS Code", level: 80, icon: VisualStudioCode, group: "Tools & Platforms" },
     { name: "Canva", level: 80, icon: Canva, group: "Tools & Platforms" },
     { name: "Jira", level: 75, icon: Jira, group: "Tools & Platforms" },
-    // PhotoShop
     { name: "PhotoShop", level: 25, icon: Photoshop, group: "Tools & Platforms" },
   ];
 
@@ -85,7 +64,7 @@ export default function Skills() {
                 <div className="flex-grow h-px bg-white/40" />
               </div>
               {/* Grid Layout */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 cursor-default">
                 {groupSkills.map((skill, i) => {
                   const Icon = skill.icon;
 
@@ -96,7 +75,8 @@ export default function Skills() {
                       whileInView={{ opacity: 1, y: 0 }}
                       transition={{ delay: i * 0.04 }}
                       viewport={{ once: true }}
-                      className="group relative rounded-2xl p-5 bg-gradient-to-br from-gray-950 to-gray-900 border border-gray-800 hover:border-gray-700 shadow-inner shadow-black/40 hover:shadow-lg hover:shadow-white/10 transition duration-300"
+                      whileHover={{ y: -5 }}
+                      className="group relative rounded-2xl p-5 bg-gradient-to-br from-gray-950 to-gray-900 border border-gray-800 hover:border-cyan-400/30 transition-colors shadow-inner shadow-black/40 hover:shadow-lg hover:shadow-white/10 transition duration-300"
                     >
                       {/* Hover glow ring */}
                       <div className="absolute inset-0 rounded-2xl pointer-events-none group-hover:ring-1 group-hover:ring-white/10 transition-all" />
@@ -133,7 +113,6 @@ export default function Skills() {
                         </div>
                       </div>
                     </motion.div>
-
                   );
                 })}
               </div>

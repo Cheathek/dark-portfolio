@@ -1,168 +1,281 @@
 import { motion } from "framer-motion";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
-import { Gmail, GitHubLight, LinkedIn, Telegram, Facebook } from "developer-icons";
-import { Download, GraduationCap, UserRound } from "lucide-react";
-const socials = [
-  { href: "https://www.linkedin.com/in/socheathek-mao", icon: LinkedIn, label: "LinkedIn" },
-  { href: "https://www.facebook.com/cheathzx", icon: Facebook, label: "X" },
-  { href: "https://t.me/cheatzx", icon: Telegram, label: "Website" },
-  { href: "mailto:maosocheathek@gmail.com", icon: Gmail, label: "Gmail" },
-  { href: "https://github.com/Cheathek", icon: GitHubLight, label: "GitHub" },
-];
+import { Facebook, GitHubLight, LinkedIn, Telegram } from "developer-icons";
+import { Download, GraduationCap, MapPin, Mail, Phone, Coffee, Lightbulb, Plane, BookOpen, UserRound, Sprout, Camera, MessageCircle } from "lucide-react";
 
-const traits = ["Innovation", "Leadership", "Problem Solving", "Team Collaboration"];
-const describe = `I have experience working both independently and in team environments, delivering quality projects on time. With a keen eye for design and a strong focus on user experience (UX/UI), I aim to build websites that not only look great but are also functional, fast, and accessible to all users, regardless of their devices or abilities. My skills also extend to ensuring that web applications are optimized for performance and meet modern web standards.`;
+
+const journey = `I'm a passionate full-stack developer and designer with over 5 years of experience creating digital experiences that matter. My journey began with curiosity about how things work on the web, and it has evolved into a deep expertise in modern technologies.`;
+
+const personalInfos = [
+  { icon: MapPin, handle: "San Francisco, CA", platform: "Location", link: "https://www.google.com/maps?q=San+Francisco,CA" },
+  { icon: Mail, handle: "maosocheathek@gmail.com", platform: "Email", link: "mailto:maosocheathek@gmail.com" },
+  { icon: Phone, handle: "+1 (555) 123-4567", platform: "Phone", link: "tel:+15551234567" }
+];
 
 const education = [
   {
-    school: "Kampong Thum High School",
-    degree: "High School Diploma · 2021 - 2022",
+    degree: "Bachelor of Computer Science",
+    school: "Stanford University",
+    field: "Software Engineering & AI",
+    years: "2021 - 2022"
   },
   {
-    school: "Passerelles Numériques Cambodia (PNC)",
-    degree: "Associate Degree · 2022 - 2024",
+    degree: "AWS Certified Solutions Architect",
+    school: "Amazon Web Services",
+    field: "Cloud Architecture",
+    years: "2022 - 2024"
   },
+];
+
+const quickStats = [
+  { label: "Experience", value: "5+" },
+  { label: "Projects Completed", value: "100+" },
+  { label: "Happy Clients", value: "50+" },
+  { label: "Average Rating", value: "4.9/5" }
+];
+
+const interests = [
+  { icon: Coffee, title: "Coffee", subtitle: "Enthusiast" },
+  { icon: Lightbulb, title: "Tech", subtitle: "Innovation" },
+  { icon: Plane, title: "Travel &", subtitle: "Culture" },
+  { icon: BookOpen, title: "Continuous", subtitle: "Learning" }
+];
+
+const socials = [
+  { icon: GitHubLight, handle: "@johndoe", platform: "GitHub", link: "https://github.com/johndoe" },
+  { icon: LinkedIn, handle: "/in/johndoe", platform: "LinkedIn", link: "https://linkedin.com/in/johndoe" },
+  { icon: Telegram, handle: "@johndoe", platform: "Telegram", link: "https://t.me/johndoe" },
+  { icon: Facebook, handle: "@cheatzx", platform: "Facebook", link: "https://facebook.com/cheatzx" }
 ];
 
 export default function About() {
   return (
-    <section id="about" className="py-32 px-4 relative">
-      <div className="absolute inset-0 cyber-grid opacity-30"></div>
+    <section id="about" className="relative py-24 px-4 md:px-8 bg-black text-white overflow-hidden">
+
+
       <div className="max-w-7xl mx-auto relative z-10">
-        {/* Section Title */}
-        <div className="text-center mb-20">
-          <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/5 border border-white/20 mb-4">
-            <UserRound className="w-5 h-5" />
-            <span className="text-sm text-white font-medium tracking-wide">ABOUT ME</span>
-          </div>
+        {/* Header Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
           <h2 className="text-5xl md:text-7xl font-black text-white mb-2 tracking-tight">
-            WHO I
+            MY
             <motion.span
               className="block text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-300 to-white"
             >
-              AM
+              STORY
             </motion.span>
           </h2>
           <div className="w-24 h-px bg-white mx-auto mb-8"></div>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-            My journey, skills, and what drives me.
+            The journey, the passion, and the expertise that defines me
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-16 items-start">
-          {/* Profile Section */}
-          <div className="order-2 lg:order-1 flex justify-center items-center">
-            <div className="flex flex-col items-center text-center">
-              {/* Avatar */}
-              <div className="rounded-3xl relative w-64 h-64 sm:w-72 sm:h-72 mb-4 bg-gradient-to-br from-gray-800 to-black shadow-inner shadow-black/50 border border-white/10 group">
-                <Avatar className="w-full h-full">
-                  <motion.div
-                    className="absolute inset-0 z-10 pointer-events-none"
-                    initial={{ x: "-100%" }}
-                    animate={{ x: "100%" }}
-                    transition={{
-                      duration: 5,
-                      repeat: Infinity,
-                      repeatType: "loop",
-                      ease: "easeInOut",
-                    }}
-                  >
-                    <div className="w-1/5 h-full bg-gradient-to-r from-transparent via-white/10 to-transparent blur-sm" />
-                  </motion.div>
-                  <AvatarImage
-                    src="/profile.jpg"
-                    alt="Profile"
-                    className="object-cover"
-                  />
-                </Avatar>
-              </div>
-              {/* Name + Role + Company */}
-              <div className="text-white space-y-1 mb-10">
-                <h3 className="text-2xl md:text-3xl font-semibold">
-                  Socheath Ek Mao
-                </h3>
-                <p className="text-lg font-semibold text-white/70">Full Stack Developer</p>
-                <p className="text-md text-cyan-500">Tech Company, Inc.</p>
-              </div>
+        {/* Main Content Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          {/* Left Column - Profile & Contact */}
+          <div className="lg:col-span-4 space-y-8">
+            {/* Profile Card */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="bg-gradient-to-br from-gray-900 to-black rounded-2xl p-8 border border-white/10 shadow-xl"
+            >
+              <div className="flex flex-col items-center">
+                <div className="relative mb-6">
+                  <div className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-400 to-blue-600 blur-md opacity-60 animate-spin-slow" />
+                  <Avatar className="w-70 h-70 border-4 border-white/10 relative">
+                    <AvatarImage src="/profile.jpg" alt="Profile" className="object-cover" />
+                  </Avatar>
+                </div>
+                <h3 className="text-2xl font-bold text-center mb-1">SOCHEATH EK MAO</h3>
+                <p className="text-gray-400 mb-6">Fullstack Developer</p>
 
-              {/* Social Icons */}
-              <div className="flex gap-4 mb-5">
-                {socials.map(({ href, icon: Icon, label }) => (
+                {/* Quick Stats */}
+                <div className="grid grid-cols-2 gap-4 cursor-default w-full mb-6">
+                  {quickStats.map((stat, index) => (
+                    <motion.div
+                      whileHover={{ y: -5 }}
+                      key={index}
+                      className="flex flex-col items-center p-4 rounded-xl bg-gray-800/50 border border-white/5 hover:border-cyan-400/30 transition-colors"
+                    >
+                      <div className="text-3xl font-bold text-white mb-2">{stat.value}</div>
+                      <div className="text-sm text-gray-400">{stat.label}</div>
+                    </motion.div>
+                  ))}
+                </div>
+
+                {/* Download Button - Holographic Effect */}
+                <motion.div
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.98 }}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                >
                   <a
-                    key={label}
-                    href={href}
+                    href="/"
+                    download
+                    className="relative inline-flex items-center gap-3 px-10 py-3.5 rounded-full bg-gradient-to-br from-gray-600 to-gray-900 border border-white/10 hover:border-white/30 shadow-lg hover:shadow-xl transition-all group overflow-hidden"
+                  >
+                    {/* Holographic sweep effect */}
+                    <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 -translate-x-full group-hover:translate-x-full transition-all duration-700" />
+                    <Download className="w-5 h-5 text-white z-10" />
+                    <span className="z-10 font-medium tracking-wide text-white">Download CV</span>
+                  </a>
+                </motion.div>
+              </div>
+            </motion.div>
+
+            {/* Contact Information */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="bg-gradient-to-br from-gray-900 to-black rounded-2xl p-8 border border-white/10 shadow-xl"
+            >
+              <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
+                <MessageCircle className="w-5 h-5" />
+                Contact Information
+              </h3>
+              <div className="space-y-4">
+                {personalInfos.map((info, index) => (
+                  <motion.a
+                    whileHover={{ y: -5 }}
+                    key={index}
+                    href={info.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label={label}
-                    className="text-white hover:text-white transition duration-300 group"
+                    className="flex items-start gap-4 p-2 rounded-lg bg-gray-800/50 border border-white/5 hover:border-cyan-400/30 transition-colors"
                   >
-                    <div className="w-10 h-10 flex items-center justify-center rounded-full bg-white/5 group-hover:bg-white/10 transition">
-                      <Icon className="w-7 h-7" />
-                    </div>
-                  </a>
-                ))}
-              </div>
-              {/* Download my CV */}
-              <a
-                href="/cv.pdf"
-                download
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/5 border border-white/20 mb-4 hover:bg-white/10 hover:border-white/30 transition-colors"
-              >
-                <Download className="w-5 h-5 text-white" />
-                <span className="text-sm text-white font-medium tracking-wide">Download CV</span>
-              </a>
-
-            </div>
-          </div>
-
-          {/* Bio + Traits + Education */}
-          <div className="space-y-10 order-1 lg:order-2">
-            <div className="max-w-3xl space-y-6 p-6 border border-white/20 rounded-2xl bg-white/5">
-              {/* Title */}
-              <h2 className="text-white text-3xl mb-8 font-semibold">Resume / Summary</h2>
-
-              {/* Bio */}
-              <div className="text-left md:text-justify text-base md:text-xl text-gray-300 leading-relaxed hyphens-none">
-                &nbsp;&nbsp;&nbsp;&nbsp; {describe}
-              </div>
-
-              {/* Traits */}
-              <div className="flex flex-wrap gap-4">
-                {traits.map((trait) => (
-                  <Badge
-                    key={trait}
-                    variant="outline"
-                    className="px-4 py-2 text-sm border-cyan-400/50 text-cyan-300 hover:bg-cyan-400/10"
-                  >
-                    {trait}
-                  </Badge>
-                ))}
-              </div>
-            </div>
-
-
-            {/* Education */}
-            <div className="space-y-6">
-              <h4 className="text-2xl font-bold text-white">Education</h4>
-              {education.map((item, index) => (
-                <div
-                  key={index}
-                  className="bg-white/5 border border-white/10 rounded-xl p-5 hover:shadow-lg transition-all duration-300"
-                >
-                  <div className="flex items-start space-x-3">
-                    <div className="p-2 bg-cyan-500 rounded-md">
-                      <GraduationCap className="w-5 h-5 text-white" />
+                    <div className="p-2 rounded-lg bg-gray-800/50 border border-white/5">
+                      <info.icon className="w-5 h-5" />
                     </div>
                     <div>
-                      <h5 className="text-cyan-300 font-semibold text-lg">
-                        {item.school}
-                      </h5>
-                      <p className="text-md text-gray-400">{item.degree}</p>
+                      <p className="text-gray-400 text-sm">{info.platform}</p>
+                      <p className="text-white font-medium">{info.handle}</p>
                     </div>
-                  </div>
+                  </motion.a>
+                ))}
+              </div>
+            </motion.div>
+            {/* Social Links */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+              className="bg-gradient-to-br from-gray-900 to-black rounded-2xl p-8 border border-white/10 shadow-xl"
+            >
+              <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
+                <UserRound className="w-5 h-5 text-stone-50" />
+                Find Me Online
+              </h3>
+              <div className="grid grid-cols-2 gap-4">
+                {socials.map((social, index) => (
+                  <motion.a
+                    whileHover={{ y: -5 }}
+                    key={index}
+                    href={social.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 p-3 rounded-lg bg-gray-800/50 border border-white/5 hover:border-cyan-400/30 transition-colors"
+                  >
+                    <social.icon className="w-5 h-5" />
+                    <div>
+                      <p className="text-white font-medium text-sm">{social.platform}</p>
+                      <p className="text-gray-400 text-xs">{social.handle}</p>
+                    </div>
+                  </motion.a>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Right Column - Main Content */}
+          <div className="lg:col-span-8 space-y-8">
+            {/* My Journey */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="bg-gradient-to-br from-gray-900 to-black rounded-2xl p-8 border border-white/10 shadow-xl"
+            >
+              <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
+                <Sprout className="w-6 h-6" />
+                My Professional Journey
+              </h3>
+              <div className="prose prose-invert max-w-none">
+                <p className="text-gray-300 mb-4">{journey}</p>
+                <p className="text-gray-300 mb-4">
+                  I specialize in React, Node.js, and cloud technologies, but what sets me apart is my ability to bridge the gap between design and development. I don't just build applications—I craft experiences that users love and businesses depend on.
+                </p>
+                <p className="text-gray-300">
+                  When I'm not coding, you'll find me exploring new technologies, contributing to open-source projects, or sharing knowledge with the developer community through talks and mentoring.
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Education & Experience */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {/* Education */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                className="bg-gradient-to-br from-gray-900 to-black rounded-2xl p-8 border border-white/10 shadow-xl"
+              >
+                <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
+                  <GraduationCap className="w-6 h-6" />
+                  Education
+                </h3>
+                <div className="space-y-6">
+                  {education.map((edu, index) => (
+                    <div
+                      key={index}
+                      className="flex items-center relative pl-8 pb-6 last:pb-0">
+                      <div className="absolute left-0 transform -translate-x-1/2 w-px bg-stone-50 h-full top-0" />
+                      <div className="absolute left-0 transform -translate-x-1/2 w-4 h-4 rounded-full bg-stone-50 top-1" />
+                      {/* Education Content (Text on the right) */}
+                      <div className="">
+                        <h4 className="text-lg font-bold text-white mb-1">{edu.degree}</h4>
+                        <p className="text-gray-400 mb-1">{edu.school}</p>
+                        <p className="text-sm text-gray-500">{edu.field}</p>
+                        <p className="text-sm text-stone-50 mt-5">{edu.years}</p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              ))}
+              </motion.div>
+
+              {/* Interests */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+                className="bg-gradient-to-br from-gray-900 to-black rounded-2xl p-8 border border-white/10 shadow-xl"
+              >
+                <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
+                  <Camera className="w-6 h-6" />
+                  Interests & Hobbies
+                </h3>
+                <div className="grid grid-cols-2 gap-4 cursor-default">
+                  {interests.map((interest, index) => (
+                    <motion.div
+                      whileHover={{ y: -5 }}
+                      key={index}
+                      className="flex flex-col items-center p-4 rounded-xl bg-gray-800/50 border border-white/5 hover:border-cyan-400/30 transition-colors"
+                    >
+                      <interest.icon className="w-8 h-8 text-stone-50 mb-2" />
+                      <h4 className="text-white font-medium text-center">{interest.title}</h4>
+                      <p className="text-gray-400 text-sm text-center">{interest.subtitle}</p>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
             </div>
           </div>
         </div>

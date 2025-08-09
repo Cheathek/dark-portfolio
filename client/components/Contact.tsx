@@ -211,7 +211,7 @@ ${data.message}
                 <a
                   key={contact.label}
                   href={contact.href}
-                  className="group block p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-white/30 hover:bg-white/10 backdrop-blur-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-white/10"
+                  className="group block p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-cyan-400/30 hover:bg-white/10 backdrop-blur-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-white/10"
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
                   <div className="flex items-start gap-5">

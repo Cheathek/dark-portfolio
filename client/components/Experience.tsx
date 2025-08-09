@@ -286,7 +286,7 @@ export default function Projects() {
                             <span
                               key={tech}
                               title={tech} 
-                              className="flex items-center justify-center px-3 py-1.5 bg-slate-800/60 border border-slate-700/50 rounded-lg text-xs font-medium text-slate-300 hover:bg-slate-700/60 hover:border-slate-600/70 hover:text-slate-200 transition-all duration-300"
+                              className="flex items-center justify-center px-3 py-1.5 bg-slate-800/60 border border-slate-700/50 rounded-lg text-xs font-medium text-slate-300 hover:bg-slate-700/60 hover:border-slate-600/70 hover:border-cyan-400/30 transition-colors duration-300"
                             >
                               {techIcons[tech] && (
                                 <span className="text-sm">{techIcons[tech]}</span>

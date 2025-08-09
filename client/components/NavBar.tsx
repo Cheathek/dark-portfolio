@@ -95,7 +95,7 @@ export function NavBar() {
                     <motion.div
                       layoutId="active-pill"
                       className="absolute inset-0 bg-white rounded-full shadow-md"
-                      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                      transition={{ type: "spring", stiffness: 300, damping: 15 }}
                       style={{ zIndex: -1 }}
                     />
                   )}

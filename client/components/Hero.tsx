@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
+import { Bootstrap5, Figma, Photoshop, TailwindCSS } from 'developer-icons';
 import { Sun, Moon, Mail, ChevronsRight, CloudSun, BriefcaseBusiness } from 'lucide-react';
 
 export default function Hero() {
@@ -21,6 +22,14 @@ export default function Hero() {
       return { text: 'Good evening', Icon: Moon, color: '#A78BFA' };
     }
   };
+
+  const techStack = [
+    { icon: <Photoshop className="h-10 w-10" />, label: 'PhotoShop' },
+    { icon: <Bootstrap5 className="h-10 w-10" />, label: 'Bootstrap' },
+    { icon: <TailwindCSS className="h-10 w-10" />, label: 'Tailwind CSS' },
+    { icon: <Figma className="h-10 w-10" />, label: 'Figma' },
+  ];
+
   const { text: greetingText, Icon: GreetingIcon, color: iconColor } = getGreeting();
 
   useEffect(() => {
@@ -73,8 +82,7 @@ export default function Hero() {
     <section
       id="hero"
       ref={heroRef}
-      className="min-h-screen flex items-center justify-center relative overflow-hidden px-4 sm:px-8"
-    >
+      className="min-h-screen flex items-center justify-center relative overflow-hidden px-4 sm:px-8">
       {/* Animated Background */}
       <div className="absolute inset-0 bg-black">
         <div className="absolute inset-0 mesh-gradient-bg opacity-30"></div>
@@ -95,18 +103,43 @@ export default function Hero() {
         <div className="absolute top-1/4 left-1/4 w-full max-w-[320px] md:w-96 md:h-96 bg-gradient-to-r from-blue-600/20 to-purple-600/20 rounded-full blur-3xl animate-float"></div>
         <div
           className="absolute bottom-1/4 right-1/4 w-full max-w-[300px] md:w-80 md:h-80 bg-gradient-to-r from-cyan-600/20 to-blue-600/20 rounded-full blur-3xl animate-float"
-          style={{ animationDelay: '2s' }}
-        ></div>
+          style={{ animationDelay: '2s' }}></div>
       </div>
 
       <div className="relative z-10 text-center max-w-6xl mx-auto">
         <div className="mb-8 space-y-4">
-          <div className="inline-flex items-center px-6 py-3 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm mb-2 mt-24 sm:mt-20 animate-fade-in-up">
-            <GreetingIcon className="w-5 h-5 mr-3" style={{ color: iconColor }} />
-            <span className="text-sm sm:text-base md:text-lg text-gray-300 font-medium">
-              {greetingText}, <span className="font-semibold text-cyan-300 tracking-wide">my name is</span>
-            </span>
-          </div>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6 }}
+            className="mt-24 sm:mt-20 flex justify-center">
+            {/* Content wrapper */}
+            <div className="flex items-center gap-5 px-8 py-6">
+              {/* Animated icon circle */}
+              <motion.div
+                whileHover={{ scale: 1.1 }}
+                className="p-3 rounded-full bg-gradient-to-br from-cyan-500/15 to-blue-600/15 border border-white/10 shadow-sm"
+              >
+                <GreetingIcon className="w-6 h-6 text-cyan-300" style={{ color: iconColor }} />
+              </motion.div>
+              {/* Text stack */}
+              <div className="flex flex-col">
+                <motion.span
+                  initial={{ x: -10 }}
+                  animate={{ x: 0 }}
+                  className="text-xs uppercase tracking-[0.2em] font-medium mb-1">
+                  {greetingText}
+                </motion.span>
+                <motion.h2
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.2 }}
+                  className="text-3xl font-light text-white leading-tight">
+                  My name is
+                </motion.h2>
+              </div>
+            </div>
+          </motion.div>
 
           <h2 className="text-6xl sm:text-6xl md:text-8xl italic font-black text-white tracking-tight mb-4">
             SOCHEATH EK
@@ -135,12 +168,12 @@ export default function Hero() {
         <div className="flex flex-col sm:flex-row gap-6 justify-center mb-16">
           <Button
             size="lg"
-            className="group relative px-8 py-4 bg-white text-black hover:bg-gray-200 text-lg font-semibold glow-effect"
-            onClick={() => scrollToSection('projects')}
+            className="group relative px-8 py-4 bg-white text-black hover:bg-gray-50 text-lg font-semibold glow-effect"
+            onClick={() => scrollToSection('experience')}
           >
             <BriefcaseBusiness className="mr-2 h-5 w-5 group-hover:rotate-12 transition-transform" />
             View My Work
-            <ChevronsRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+            <ChevronsRight className="ml-2 h-5 w-5 group-hover:translate-x-5 transition-transform" />
           </Button>
           <Button
             size="lg"
@@ -153,19 +186,18 @@ export default function Hero() {
           </Button>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 max-w-2xl mx-auto">
-          <div className="text-center glass-effect rounded-xl p-6">
-            <div className="text-3xl font-bold text-white mb-2">50+</div>
-            <div className="text-sm text-gray-400">Projects Completed</div>
-          </div>
-          <div className="text-center glass-effect rounded-xl p-6">
-            <div className="text-3xl font-bold text-white mb-2">5+</div>
-            <div className="text-sm text-gray-400">Years Experience</div>
-          </div>
-          <div className="text-center glass-effect rounded-xl p-6">
-            <div className="text-3xl font-bold text-white mb-2">100%</div>
-            <div className="text-sm text-gray-400">Client Satisfaction</div>
-          </div>
+        {/* Tech Stack Showcase */}
+        <div className="flex flex-wrap justify-center gap-6">
+          {techStack.map((tech, index) => (
+            <motion.div
+              key={index}
+              className="flex items-center gap-2 p-3 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-colors duration-300"
+              whileHover={{ scale: 1.05 }}
+            >
+              {tech.icon}
+              <span className="text-sm text-gray-300">{tech.label}</span>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
