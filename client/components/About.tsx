@@ -3,7 +3,6 @@ import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Facebook, GitHubLight, LinkedIn, Telegram } from "developer-icons";
 import { Download, GraduationCap, MapPin, Mail, Phone, Coffee, Lightbulb, Plane, BookOpen, UserRound, Sprout, Camera, MessageCircle } from "lucide-react";
 
-
 const journey = `I'm a passionate full-stack developer and designer with over 5 years of experience creating digital experiences that matter. My journey began with curiosity about how things work on the web, and it has evolved into a deep expertise in modern technologies.`;
 
 const personalInfos = [
@@ -43,9 +42,7 @@ const socials = [
 
 export default function About() {
   return (
-    <section id="about" className="relative py-24 px-4 md:px-8 bg-black text-white overflow-hidden">
-
-
+    <section id="about" className="overflow-hidden relative py-24 px-4 md:px-8 bg-black text-white overflow-hidden">
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Header Section */}
         <motion.div

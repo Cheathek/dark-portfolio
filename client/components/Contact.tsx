@@ -147,7 +147,7 @@ ${data.message}
   };
 
   return (
-    <section id="contact" className="py-32 px-4 relative">
+    <section id="contact" className="py-32 px-4 relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0">
         {/* Subtle geometric pattern */}

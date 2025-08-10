@@ -29,7 +29,7 @@ export default function Skills() {
   const groups = ["Programming Languages", "Frameworks & Libraries", "Tools & Platforms"];
 
   return (
-    <section id="skills" className="py-32 px-4 relative">
+    <section id="skills" className="overflow-hidden py-32 px-4 relative">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-20">

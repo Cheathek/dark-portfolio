@@ -115,7 +115,7 @@ export default function Projects() {
     selectedCategory === 'All' ? projects : projects.filter((p) => p.category === selectedCategory);
 
   return (
-    <section id="experience" className="min-h-screen bg-black text-white">
+    <section id="experience" className="min-h-screen bg-black relative overflow-hidden text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-8 py-16">
         {/* Header */}
         <div className="text-center mb-16">
@@ -274,15 +274,6 @@ export default function Projects() {
                       Live
                     </a>
                   </div>
-                </div>
-
-                {/* Hover Arrow */}
-                <div
-                  className={`absolute right-4 top-1/2 transform -translate-y-1/2 transition-all duration-300 ${
-                    hoveredProject === index ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-4'
-                  }`}
-                >
-                  <ChevronRight className="w-6 h-6 text-gray-600" />
                 </div>
               </div>
             </div>
