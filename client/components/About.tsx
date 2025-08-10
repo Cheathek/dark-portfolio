@@ -27,13 +27,6 @@ const education = [
   },
 ];
 
-const quickStats = [
-  { label: "Experience", value: "5+" },
-  { label: "Projects Completed", value: "100+" },
-  { label: "Happy Clients", value: "50+" },
-  { label: "Average Rating", value: "4.9/5" }
-];
-
 const interests = [
   { icon: Coffee, title: "Coffee", subtitle: "Enthusiast" },
   { icon: Lightbulb, title: "Tech", subtitle: "Innovation" },
@@ -62,11 +55,11 @@ export default function About() {
           className="text-center mb-16"
         >
           <h2 className="text-5xl md:text-7xl font-black text-white mb-2 tracking-tight">
-            MY
+            WHO I
             <motion.span
               className="block text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-300 to-white"
             >
-              STORY
+              AM
             </motion.span>
           </h2>
           <div className="w-24 h-px bg-white mx-auto mb-8"></div>
@@ -98,15 +91,21 @@ export default function About() {
 
                 {/* Quick Stats */}
                 <div className="grid grid-cols-2 gap-4 cursor-default w-full mb-6">
-                  {quickStats.map((stat, index) => (
-                    <motion.div
+                  {socials.map((social, index) => (
+                    <motion.a
                       whileHover={{ y: -5 }}
                       key={index}
-                      className="flex flex-col items-center p-4 rounded-xl bg-gray-800/50 border border-white/5 hover:border-cyan-400/30 transition-colors"
+                      href={social.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-3 p-3 rounded-lg bg-gray-800/50 border border-white/5 hover:border-cyan-400/30 transition-colors"
                     >
-                      <div className="text-3xl font-bold text-white mb-2">{stat.value}</div>
-                      <div className="text-sm text-gray-400">{stat.label}</div>
-                    </motion.div>
+                      <social.icon className="w-5 h-5" />
+                      <div>
+                        <p className="text-white font-medium text-sm">{social.platform}</p>
+                        <p className="text-gray-400 text-sm">{social.handle}</p>
+                      </div>
+                    </motion.a>
                   ))}
                 </div>
 
@@ -120,7 +119,7 @@ export default function About() {
                   <a
                     href="/"
                     download
-                    className="relative inline-flex items-center gap-3 px-10 py-3.5 rounded-full bg-gradient-to-br from-gray-600 to-gray-900 border border-white/10 hover:border-white/30 shadow-lg hover:shadow-xl transition-all group overflow-hidden"
+                    className="relative inline-flex items-center gap-3 px-10 py-3.5 rounded-full bg-gray-800/50 border border-white/10 hover:border-white/30 shadow-lg hover:shadow-xl transition-all group overflow-hidden"
                   >
                     {/* Holographic sweep effect */}
                     <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 -translate-x-full group-hover:translate-x-full transition-all duration-700" />
@@ -158,36 +157,6 @@ export default function About() {
                     <div>
                       <p className="text-gray-400 text-sm">{info.platform}</p>
                       <p className="text-white font-medium">{info.handle}</p>
-                    </div>
-                  </motion.a>
-                ))}
-              </div>
-            </motion.div>
-            {/* Social Links */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-              className="bg-gradient-to-br from-gray-900 to-black rounded-2xl p-8 border border-white/10 shadow-xl"
-            >
-              <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
-                <UserRound className="w-5 h-5 text-stone-50" />
-                Find Me Online
-              </h3>
-              <div className="grid grid-cols-2 gap-4">
-                {socials.map((social, index) => (
-                  <motion.a
-                    whileHover={{ y: -5 }}
-                    key={index}
-                    href={social.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-3 p-3 rounded-lg bg-gray-800/50 border border-white/5 hover:border-cyan-400/30 transition-colors"
-                  >
-                    <social.icon className="w-5 h-5" />
-                    <div>
-                      <p className="text-white font-medium text-sm">{social.platform}</p>
-                      <p className="text-gray-400 text-xs">{social.handle}</p>
                     </div>
                   </motion.a>
                 ))}

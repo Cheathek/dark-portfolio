@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from "framer-motion";
-import { BriefcaseBusiness, Code2, Home, Mail, Menu, MessageCircle, User2Icon, X } from 'lucide-react';
+import { AtSign, BriefcaseBusiness, Code2, Home, Mail, Menu, MessageCircle, SendHorizonal, User2Icon, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export function NavBar() {
@@ -12,7 +12,6 @@ export function NavBar() {
     const handleScroll = () => {
       // Handle navbar background opacity
       setIsScrolled(window.scrollY > 50);
-
       // Handle active section highlighting
       const sections = ['hero', 'about', 'skills', 'experience', 'contact'];
       const scrollPosition = window.scrollY + 100;
@@ -69,7 +68,7 @@ export function NavBar() {
                 <Code2 className="w-8 h-8 group-hover:rotate-12 transition-transform duration-300" />
                 <div className="absolute inset-0 bg-cyan-400/20 rounded-full blur-lg group-hover:bg-cyan-400/40 transition-all duration-300"></div>
               </div>
-              <span className="hidden sm:block">SocheathEk•Mao</span>
+              <span className="hidden sm:block">MSCE</span>
             </button>
 
             {/* Desktop Navigation */}
@@ -78,7 +77,7 @@ export function NavBar() {
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className={`relative px-5 py-2 text-sm font-medium transition-all duration-300 rounded-full group flex items-center justify-center ${activeSection === item.id
+                  className={`relative px-6 py-3 text-sm font-medium transition-all duration-300 rounded-full group flex items-center justify-center ${activeSection === item.id
                     ? 'text-black bg-white'
                     : 'text-gray-300 hover:text-white hover:bg-white/10'
                     }`}
@@ -94,6 +93,7 @@ export function NavBar() {
                   {activeSection === item.id && (
                     <motion.div
                       layoutId="active-pill"
+                      animate={{ boxShadow: "0 0 0.5rem rgba(255,255,255,0.8)" }}
                       className="absolute inset-0 bg-white rounded-full shadow-md"
                       transition={{ type: "spring", stiffness: 300, damping: 15 }}
                       style={{ zIndex: -1 }}
@@ -104,12 +104,14 @@ export function NavBar() {
             </div>
             {/* Desktop CTA */}
             <div className="hidden lg:flex items-center space-x-4">
+              {/* // className="group relative px-8 py-4 bg-white text-black hover:bg-gray-50 text-lg font-semibold glow-effect" */}
               <Button
+                size="lg"
+                className="group flex items-center gap-2 px-5 py-3 rounded-lg text-white bg-gray-800/60 border border-white/60 hover:border-cyan-400 hover:bg-gray-800/80 transition-all duration-300"
                 onClick={() => scrollToSection('contact')}
-                className="bg-transparent border border-gray-50 text-gray-50 hover:bg-gray-50 hover:text-black font-semibold"
               >
-                <MessageCircle className="h-5 w-5" />
                 Let's Talk
+                <AtSign className="h-5 w-5 transform transition-transform duration-300 group-hover:rotate-45" />
               </Button>
             </div>
             {/* Mobile Menu Button */}

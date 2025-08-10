@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { Bootstrap5, Figma, Photoshop, TailwindCSS } from 'developer-icons';
+import { React, ShadcnUI, TailwindCSS, ViteJS } from 'developer-icons';
 import { Sun, Moon, Mail, ChevronsRight, CloudSun, BriefcaseBusiness } from 'lucide-react';
 
 export default function Hero() {
@@ -24,10 +24,10 @@ export default function Hero() {
   };
 
   const techStack = [
-    { icon: <Photoshop className="h-10 w-10" />, label: 'PhotoShop' },
-    { icon: <Bootstrap5 className="h-10 w-10" />, label: 'Bootstrap' },
+    { icon: <React className="h-10 w-10" />, label: 'React' },
+    { icon: <ViteJS className="h-10 w-10" />, label: 'Vite' },
     { icon: <TailwindCSS className="h-10 w-10" />, label: 'Tailwind CSS' },
-    { icon: <Figma className="h-10 w-10" />, label: 'Figma' },
+    { icon: <ShadcnUI className="h-10 w-10" />, label: 'Shadcn' },
   ];
 
   const { text: greetingText, Icon: GreetingIcon, color: iconColor } = getGreeting();
@@ -187,18 +187,26 @@ export default function Hero() {
         </div>
 
         {/* Tech Stack Showcase */}
-        <div className="flex flex-wrap justify-center gap-6">
-          {techStack.map((tech, index) => (
-            <motion.div
-              key={index}
-              className="flex items-center gap-2 p-3 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-colors duration-300"
-              whileHover={{ scale: 1.05 }}
-            >
-              {tech.icon}
-              <span className="text-sm text-gray-300">{tech.label}</span>
-            </motion.div>
-          ))}
+        <div className="flex flex-col items-center gap-6">
+          <h2 className="text-xl sm:text-2xl font-semibold text-white">
+            This Portfolio Was Built With
+          </h2>
+
+          <div className="flex flex-wrap justify-center cursor-default gap-6">
+            {techStack.map((tech, index) => (
+              <motion.div
+                key={index}
+                className="flex items-center gap-2 p-3 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-colors duration-300"
+                // whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.05, rotate: 2 }}
+              >
+                {tech.icon}
+                <span className="text-sm text-gray-300">{tech.label}</span>
+              </motion.div>
+            ))}
+          </div>
         </div>
+
       </div>
     </section>
   );
