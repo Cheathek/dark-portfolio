@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Github, ExternalLink, BriefcaseBusiness, Building2, MapPin, ChevronRight, Dot, } from 'lucide-react';
+import { Github, BriefcaseBusiness, Building2, MapPin, Dot, TvMinimalPlay, User, Clock, Box, MousePointerClick, User2, School, } from 'lucide-react';
 import { Bootstrap5, Canva, CSS3, Figma, GitHubLight, HTML5, JavaScript, Laravel, MySQL, NextJs, PHP, Python, ReactQuery, ShadcnUI, TailwindCSS, TypeScript, VisualStudioCode, ViteJS, VueJs, WordPress } from 'developer-icons';
 const techIcons: Record<string, React.ReactNode> = {
   React: <ReactQuery className="w-6 h-6" />,
@@ -138,140 +138,157 @@ export default function Projects() {
         </div>
 
         {/* Category Filter */}
-        <div className="mb-16 flex flex-wrap justify-center gap-2 bg-gray-900 p-1 rounded-md w-fit mx-auto">
+        <div className="mb-16 flex flex-wrap justify-center gap-5 bg-gradient-to-br from-gray-950 to-gray-900 border border-gray-800 p-1 rounded-md w-fit mx-auto">
           {categories.map((category) => (
-            <button
+            <motion.button
               key={category}
               onClick={() => setSelectedCategory(category)}
-              className={`px-5 py-2 text-sm font-medium rounded-md transition-colors ${
-                selectedCategory === category
-                  ? 'bg-white text-black'
-                  : 'text-gray-400 hover:text-white hover:bg-gray-800'
-              }`}
+              className={`relative px-5 py-2.5 text-sm font-medium rounded-md transition-colors ${selectedCategory === category
+                ? 'bg-white text-black'
+                : 'text-gray-400 hover:text-white hover:bg-gray-800'
+                }`}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
               {category.toUpperCase()}
               {category !== 'All' && (
-                <span className="ml-2 text-xs font-normal">
-                  ({projects.filter((p) => p.category === category).length})
+                <span className="ml-2 text-md font-normal">
+                  {projects.filter((p) => p.category === category).length}
                 </span>
               )}
-            </button>
+              {selectedCategory === category && (
+                <motion.span
+                  layoutId="activeCategory"
+                  className="absolute inset-0 bg-white rounded-md -z-10"
+                  initial={false}
+                  transition={{
+                    type: "spring",
+                    stiffness: 500,
+                    damping: 30,
+                    bounce: 0.25
+                  }}
+                />
+              )}
+            </motion.button>
           ))}
         </div>
-
         {/* Projects List */}
-        <div className="space-y-6">
+        <div className="space-y-4 sm:space-y-7">
           {filteredProjects.map((project, index) => (
             <div
               key={index}
               onMouseEnter={() => setHoveredProject(index)}
               onMouseLeave={() => setHoveredProject(null)}
-              className={`group relative rounded-2xl bg-gradient-to-br from-gray-950 to-gray-900 border border-gray-800 hover:border-cyan-400/30 shadow-inner shadow-black/40 hover:shadow-lg hover:shadow-white/10 transition duration-300 ${
-                hoveredProject === index ? 'bg-gray-950' : 'hover:bg-gray-950'
-              }`}
+              className="group relative rounded-xl sm:rounded-2xl bg-gradient-to-br from-gray-950 to-gray-900 border border-gray-800 hover:border-cyan-400/30 shadow-inner shadow-black/40 hover:shadow-lg hover:shadow-white/10 transition-all duration-300"
             >
-              <div className="grid grid-cols-12 gap-6 sm:gap-8 py-8 px-4 sm:px-6">
-                {/* Left: Project Number & Category */}
-                <div className="col-span-2 flex flex-col justify-between items-center sm:items-start">
-                  <div className="text-4xl sm:text-6xl font-light text-gray-800 group-hover:text-gray-600 transition-colors select-none">
+              {/* Mobile-only click indicator */}
+              <div className="sm:hidden absolute bottom-3 right-3 flex items-center gap-1 text-xs text-gray-400 animate-pulse">
+                <MousePointerClick className="w-4 h-4" />
+                <span>Tap to see more</span>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 sm:gap-6 p-4 sm:p-6 sm:py-8">
+                {/* Left: Project Number & Category (Mobile Top) */}
+                <div className="sm:col-span-2 flex flex-row sm:flex-col justify-between items-start sm:items-center">
+                  <div className="text-3xl sm:text-6xl font-light text-gray-100 group-hover:text-gray-600 transition-colors select-none">
                     {String(index + 1).padStart(2, '0')}
                   </div>
-                  <div className="space-y-2 mt-4 sm:mt-0 flex flex-col items-center sm:items-start">
-                    <div
-                      className={`w-3 h-3 rounded-full ${
-                        project.category === 'Company'
-                          ? 'bg-white'
-                          : project.category === 'Personal'
-                          ? 'bg-gray-500'
-                          : 'bg-gray-700'
-                      }`}
-                    ></div>
-                    <span className="text-xs text-gray-500 uppercase tracking-wider">
-                      {project.category}
+                  <div className="sm:mt-4">
+                    <span className="flex items-center gap-2 sm:gap-2 bg-gradient-to-br from-gray-950 to-gray-900 border border-gray-800 px-2 sm:px-3 py-1 rounded-md">
+                      <span className="flex-shrink-0">
+                        {project.category === 'Personal' && <User2 className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400" />}
+                        {project.category === 'Academy' && <School className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400" />}
+                        {project.category === 'Company' && <Building2 className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400" />}
+                      </span>
+                      <p className="text-sm sm:text-lg text-gray-400">
+                        {project.category}
+                      </p>
                     </span>
                   </div>
                 </div>
 
                 {/* Middle: Project Info */}
-                <div className="col-span-10 sm:col-span-7 space-y-4">
+                <div className="sm:col-span-7 space-y-3 sm:space-y-4">
                   {/* Title & Company */}
                   <div>
-                    <h2 className="text-xl sm:text-3xl font-bold mb-1 group-hover:text-gray-300 transition-colors">
+                    <h2 className="text-lg sm:text-3xl font-bold mb-1 group-hover:text-gray-300 transition-colors">
                       {project.title}
                     </h2>
-                    <div className="flex flex-wrap items-center gap-3 text-gray-400 text-sm sm:text-base">
-                      <span className="flex items-center gap-1 whitespace-nowrap">
-                        <Building2 className="w-4 h-4" />
+                    <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-xs sm:text-base text-gray-400">
+                      <span className="flex items-center gap-1">
+                        <Building2 className="w-3 h-3 sm:w-4 sm:h-4" />
                         {project.companyName}
                       </span>
-                      <Dot className="w-3 h-3" />
-                      <span className="flex items-center gap-1 whitespace-nowrap">
-                        <MapPin className="w-4 h-4" />
+                      <Dot className="w-2 h-2 sm:w-3 sm:h-3" />
+                      <span className="flex items-center gap-1">
+                        <MapPin className="w-3 h-3 sm:w-4 sm:h-4" />
                         {project.companyLocation}
                       </span>
                     </div>
                   </div>
 
                   {/* Role & Duration */}
-                  <div className="flex flex-wrap gap-4 items-center text-xs sm:text-sm text-gray-400">
-                    <span className="bg-gray-900 px-3 py-1 rounded">{project.role}</span>
-                    <span>{project.duration}</span>
+                  <div className="flex flex-wrap gap-2 sm:gap-4 items-center text-xs text-gray-400">
+                    <span className="flex items-center gap-1 sm:gap-2 bg-gray-800 px-2 sm:px-3 py-1 rounded-md">
+                      <User className="w-3 h-3 sm:w-4 sm:h-4" />
+                      {project.role}
+                    </span>
+                    <span className="flex items-center gap-1 sm:gap-2">
+                      <Clock className="w-3 h-3 sm:w-4 sm:h-4" />
+                      {project.duration}
+                    </span>
                     <span>•</span>
-                    <span>{project.projectType}</span>
+                    <span className="flex items-center gap-1 sm:gap-2">
+                      <Box className="w-3 h-3 sm:w-4 sm:h-4" />
+                      {project.projectType}
+                    </span>
                   </div>
 
                   {/* Description - Show on Hover */}
-                  <div
-                    className={`overflow-hidden transition-all duration-500 max-w-full ${
-                      hoveredProject === index ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'
-                    }`}
-                  >
-                    <p className="text-gray-300 leading-relaxed text-sm mt-4 border-l-2 border-gray-800 pl-4">
+                  <div className={`overflow-hidden transition-all duration-300 ${hoveredProject === index ? 'max-h-40 opacity-100 mt-3' : 'max-h-0 opacity-0'}`}>
+                    <p className="text-xs sm:text-sm text-gray-300 leading-relaxed border-l-2 border-gray-800 pl-3 sm:pl-4">
                       {project.responsibility}
                     </p>
                   </div>
                 </div>
 
-                {/* Right: Tech & Actions */}
-                <div className="col-span-12 sm:col-span-3 flex flex-col justify-between items-end mt-6 sm:mt-0">
+                {/* Right: Tech & Actions (Mobile Bottom) */}
+                <div className="sm:col-span-3 flex flex-col gap-4 sm:gap-0 justify-between mt-4 sm:mt-0">
                   {/* Tech Stack */}
-                  <div className="flex flex-wrap gap-2 justify-end mb-4 max-w-full">
+                  <div className="flex flex-wrap gap-2 sm:justify-end cursor-default">
                     {project.tech.map((tech) => (
                       <div
                         key={tech}
-                        className="flex items-center gap-1 px-2 py-1 bg-gray-900 border border-gray-800 text-xs text-gray-400 hover:border-gray-600 transition-colors rounded"
+                        className="flex items-center gap-1 p-1 sm:p-2 bg-gray-900 border border-gray-800 text-xs text-gray-400 hover:border-cyan-400/30 hover:-translate-y-0.5 sm:hover:-translate-y-1 transition-all rounded-md"
                       >
                         <span>{techIcons[tech]}</span>
-                        <span>{tech}</span>
+                        <span className="hidden sm:inline">{tech}</span>
                       </div>
                     ))}
                   </div>
 
-                  {/* Action Buttons - Show on Hover */}
-                  <div
-                    className={`flex gap-2 transition-all duration-500 ${
-                      hoveredProject === index
-                        ? 'opacity-100 translate-y-0 pointer-events-auto'
-                        : 'opacity-0 translate-y-2 pointer-events-none'
-                    }`}
-                  >
+                  {/* Action Buttons */}
+                  <div className={`flex gap-2 transition-all duration-300 ${hoveredProject === index || window.innerWidth < 640
+                    ? 'opacity-100 translate-y-0 pointer-events-auto'
+                    : 'opacity-0 translate-y-2 pointer-events-none'
+                    }`}>
                     <a
                       href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-4 py-2 border border-gray-700 text-gray-300 hover:border-white hover:text-white transition-all text-sm rounded"
+                      className="flex items-center gap-1 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 border border-gray-700 text-gray-300 hover:border-white hover:text-white transition-all hover:-translate-y-0.5 sm:hover:-translate-y-1 text-xs sm:text-sm rounded-md"
                     >
-                      <Github className="w-4 h-4" />
-                      Code
+                      <Github className="w-3 h-3 sm:w-4 sm:h-4" />
+                      <span>Code</span>
                     </a>
                     <a
                       href={project.live}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-4 py-2 bg-white text-black hover:bg-gray-200 transition-all text-sm rounded"
+                      className="flex items-center gap-1 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-white text-black hover:bg-gray-200 transition-all hover:-translate-y-0.5 sm:hover:-translate-y-1 text-xs sm:text-sm rounded-md"
                     >
-                      <ExternalLink className="w-4 h-4" />
-                      Live
+                      <TvMinimalPlay className="w-3 h-3 sm:w-4 sm:w-4" />
+                      <span>Live</span>
                     </a>
                   </div>
                 </div>

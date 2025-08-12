@@ -13,7 +13,7 @@ export default defineConfig(({ mode }) => ({
       deny: [".env", ".env.*", "*.{crt,pem}", "**/.git/**", "server/**"],
     },
     allowedHosts: [
-      'dish-past-wing-phenomenon.trycloudflare.com',
+      'sydney-offline-fiji-injury.trycloudflare.com',
     ],
   },
   build: {

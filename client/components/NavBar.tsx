@@ -68,7 +68,7 @@ export function NavBar() {
                 <Code2 className="w-8 h-8 group-hover:rotate-12 transition-transform duration-300" />
                 <div className="absolute inset-0 bg-cyan-400/20 rounded-full blur-lg group-hover:bg-cyan-400/40 transition-all duration-300"></div>
               </div>
-              <span className="hidden sm:block">MSCE</span>
+              <span className="hidden sm:block">SOCHEATH</span>
             </button>
 
             {/* Desktop Navigation */}

@@ -151,10 +151,10 @@ ${data.message}
       {/* Background Elements */}
       <div className="absolute inset-0">
         {/* Subtle geometric pattern */}
-        <div className="absolute inset-0 opacity-5">
+        <div className="absolute inset-0 opacity-10">
           <div className="h-full w-full" style={{
             backgroundImage: 'radial-gradient(circle at 2px 2px, white 2px, transparent 0)',
-            backgroundSize: '60px 60px'
+            backgroundSize: '50px 50px'
           }}></div>
         </div>
 
@@ -194,7 +194,7 @@ ${data.message}
               <h2 className="text-3xl font-bold text-white mb-8">Connect With Me</h2>
 
               {/* Response time indicator */}
-              <div className="mt-10 p-6 rounded-2xl bg-white/5 border border-white/10">
+              <div className="mt-10 p-6 rounded-2xl bg-gradient-to-br from-gray-950 to-gray-900 border border-gray-800">
                 <div className="flex items-center gap-4">
                   <span className="relative flex size-3">
                     <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-95"></span>
@@ -211,7 +211,7 @@ ${data.message}
                 <a
                   key={contact.label}
                   href={contact.href}
-                  className="group block p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-cyan-400/30 hover:bg-white/10 backdrop-blur-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-white/10"
+                  className="group block p-6 rounded-2xl bg-gradient-to-br from-gray-950 to-gray-900 border border-gray-800 hover:border-cyan-400/30 hover:bg-white/10 backdrop-blur-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-white/10"
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
                   <div className="flex items-start gap-5">
@@ -234,7 +234,7 @@ ${data.message}
 
             {/* Contact Form */}
             <div className="lg:col-span-7">
-              <div className="rounded-3xl bg-white/5 border border-white/10 backdrop-blur-xl p-10 relative overflow-hidden">
+              <div className="rounded-3xl bg-gradient-to-br from-gray-950 to-gray-900 border border-gray-800 backdrop-blur-xl p-10 relative overflow-hidden">
                 {/* Form decorative elements */}
                 <div className="absolute top-0 right-0 w-32 h-32 border border-white/5 rounded-full"></div>
                 <div className="absolute bottom-0 left-0 w-24 h-24 border border-white/5 rounded-full"></div>
