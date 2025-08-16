@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Github, BriefcaseBusiness, Building2, MapPin, Dot, TvMinimalPlay, User, Clock, Box, MousePointerClick, User2, School, } from 'lucide-react';
+import { motion } from 'framer-motion'
+import { Github, BriefcaseBusiness, Building2, MapPin, Dot, TvMinimalPlay, User, Clock, Box, MousePointerClick, User2, School } from 'lucide-react';
 import { Bootstrap5, Canva, CSS3, Figma, GitHubLight, HTML5, JavaScript, Laravel, MySQL, NextJs, PHP, Python, ReactQuery, ShadcnUI, TailwindCSS, TypeScript, VisualStudioCode, ViteJS, VueJs, WordPress } from 'developer-icons';
+
 const techIcons: Record<string, React.ReactNode> = {
   React: <ReactQuery className="w-6 h-6" />,
   Python: <Python className="w-6 h-6" />,
@@ -25,8 +26,13 @@ const techIcons: Record<string, React.ReactNode> = {
   ShadcnUI: <ShadcnUI className="w-6 h-6" />,
 };
 
+const categoryIcons = {
+  Company: Building2,
+  Personal: User2,
+  Academy: School,
+};
+
 export default function Projects() {
-  const [selectedCategory, setSelectedCategory] = useState('All');
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
 
   const projects = [
@@ -110,211 +116,169 @@ export default function Projects() {
     },
   ];
 
-  const categories = ['All', 'Company', 'Personal', 'Academy'];
-  const filteredProjects =
-    selectedCategory === 'All' ? projects : projects.filter((p) => p.category === selectedCategory);
+  // Group projects by category
+  const groupedProjects = projects.reduce((acc, project, index) => {
+    if (!acc[project.category]) {
+      acc[project.category] = [];
+    }
+    acc[project.category].push({ ...project, originalIndex: index });
+    return acc;
+  }, {} as Record<string, Array<typeof projects[0] & { originalIndex: number }>>);
+
+  const CategoryDivider = ({ category, count }: { category: string; count: number }) => {
+    const IconComponent = categoryIcons[category as keyof typeof categoryIcons];
+
+    return (
+      <div className="flex items-center gap-4 my-12">
+        <div className="flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-gray-900 to-gray-800 border border-gray-700 rounded-full">
+          <IconComponent className="w-5 h-5 text-gray-300" />
+          <span className="text-lg font-semibold text-white">{category}</span>
+          <span className="bg-gray-700 text-gray-300 px-2 py-1 rounded-full text-sm font-medium">
+            {count}
+          </span>
+        </div>
+        <div className="flex-1 h-px bg-gradient-to-r from-gray-700 to-transparent"></div>
+      </div>
+    );
+  };
+
+  const ProjectCard = ({ project, index }: { project: typeof projects[0] & { originalIndex: number }; index: number }) => (
+    <div
+      onMouseEnter={() => setHoveredProject(project.originalIndex)}
+      onMouseLeave={() => setHoveredProject(null)}
+      className="group relative rounded-xl sm:rounded-2xl bg-gradient-to-br from-gray-950 to-gray-900 border border-gray-800 shadow-inner shadow-black/40 hover:shadow-lg hover:shadow-white/10 transition-all duration-300"
+    >
+      <div className="sm:hidden absolute bottom-3 right-3 flex items-center gap-1 text-xs text-gray-400 animate-pulse">
+        <MousePointerClick className="w-4 h-4" />
+        <span>Tap to see more</span>
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 sm:gap-6 p-4 sm:p-6 sm:py-8">
+        {/* Project Number */}
+        <div className="sm:col-span-1 flex justify-center items-center">
+          <div className="text-2xl sm:text-4xl font-light text-gray-100 group-hover:text-gray-600 transition-colors select-none">
+            {String(index + 1).padStart(2, '0')}
+          </div>
+        </div>
+
+        {/* Project Info */}
+        <div className="sm:col-span-8 space-y-3 sm:space-y-4">
+          <div>
+            <h2 className="text-lg sm:text-2xl font-bold mb-1 group-hover:text-gray-300 transition-colors">
+              {project.title}
+            </h2>
+            <div className="flex flex-wrap items-center gap-2 text-xs sm:text-sm text-gray-400">
+              <span className="flex items-center gap-1">
+                <Building2 className="w-3 h-3 sm:w-4 sm:h-4" />
+                {project.companyName}
+              </span>
+              <Dot className="w-2 h-2" />
+              <span className="flex items-center gap-1">
+                <MapPin className="w-3 h-3 sm:w-4 sm:h-4" />
+                {project.companyLocation}
+              </span>
+            </div>
+          </div>
+
+          <div className="flex flex-wrap gap-2 items-center text-xs text-gray-400">
+            <span className="flex items-center gap-1 bg-gray-800 px-2 py-1 rounded-md">
+              <User className="w-3 h-3" />
+              {project.role}
+            </span>
+            <span className="flex items-center gap-1">
+              <Clock className="w-3 h-3" />
+              {project.duration}
+            </span>
+            <span>•</span>
+            <span className="flex items-center gap-1">
+              <Box className="w-3 h-3" />
+              {project.projectType}
+            </span>
+          </div>
+          <div className={`overflow-hidden transition-all duration-300 ${hoveredProject === project.originalIndex ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'
+            }`}>
+            <p className="text-xs sm:text-sm text-gray-300 leading-relaxed border-l-2 border-gray-800 pl-3">
+              {project.responsibility}
+            </p>
+          </div>
+        </div>
+
+        {/* Tech Stack & Actions */}
+        <div className="sm:col-span-3 flex flex-col justify-between gap-4">
+          <div className="flex flex-wrap gap-2 sm:justify-end cursor-default">
+            {project.tech.map((tech) => (
+              <div
+                key={tech}
+                className="flex items-center gap-1 p-1 sm:p-2 bg-gray-900 border border-gray-800 text-sm text-gray-400 hover:-translate-y-0.5 transition-all rounded-md"
+              >
+                {techIcons[tech]}
+                <span className="hidden sm:inline">{tech}</span>
+              </div>
+            ))}
+          </div>
+          <div className={`flex gap-2 transition-all duration-300 ${hoveredProject === project.originalIndex || window.innerWidth < 640
+            ? 'opacity-100 translate-y-0 pointer-events-auto'
+            : 'opacity-0 translate-y-2 pointer-events-none'
+            }`}>
+            <a
+              href={project.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1 px-3 py-1.5 border border-gray-700 text-gray-300 hover:border-white hover:text-white transition-all hover:-translate-y-0.5 text-md rounded-md"
+            >
+              <Github className="w-4 h-4" />
+              <span>Code</span>
+            </a>
+            <a
+              href={project.live}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1 px-3 py-1.5 bg-white text-black hover:bg-gray-200 transition-all hover:-translate-y-0.5 text-md rounded-md"
+            >
+              <TvMinimalPlay className="w-4 h-4" />
+              <span>Live</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 
   return (
     <section id="experience" className="overflow-hidden pt-28 px-2 relative">
-        <div className="max-w-7xl mx-auto relative z-10">
-          {/* Header */}
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/5 border border-white/20 mb-4 mx-auto max-w-max">
-              <BriefcaseBusiness className="w-5 h-5" />
-              <span className="text-sm text-white font-medium tracking-wide">EXPERIENCE</span>
-            </div>
-            <h2 className="text-4xl sm:text-5xl md:text-7xl font-black text-white mb-2 tracking-tight">
-              PROFESSIONAL{' '}
-              <span
-                className="block text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-300 to-white"
-              >
-                EXPERIENCE
-              </span>
-            </h2>
-            <div className="w-20 sm:w-24 h-px bg-white mx-auto mb-6"></div>
-            <p className="text-lg sm:text-xl text-gray-400 max-w-3xl mx-auto px-4 sm:px-0">
-              Grouped by source. Showcasing innovation, automation, and creative engineering.
-            </p>
+      <div className="max-w-7xl mx-auto relative z-10">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/5 border border-white/20 mb-4">
+            <BriefcaseBusiness className="w-5 h-5" />
+            <span className="text-sm text-white font-medium tracking-wide">EXPERIENCE</span>
           </div>
-
-          {/* Category Filter */}
-          <div className="mb-16 flex flex-wrap justify-center gap-5 bg-gradient-to-br from-gray-950 to-gray-900 border border-gray-800 p-1 rounded-md w-fit mx-auto">
-            {categories.map((category) => (
-              <motion.button
-                key={category}
-                onClick={() => setSelectedCategory(category)}
-                className={`relative px-5 py-2.5 text-sm font-medium rounded-md transition-colors ${selectedCategory === category
-                  ? 'bg-white text-black'
-                  : 'text-gray-400 hover:text-white hover:bg-gray-800'
-                  }`}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                {category.toUpperCase()}
-                {category !== 'All' && (
-                  <span className="ml-2 text-md font-normal">
-                    {projects.filter((p) => p.category === category).length}
-                  </span>
-                )}
-                {selectedCategory === category && (
-                  <motion.span
-                    layoutId="activeCategory"
-                    className="absolute inset-0 bg-white rounded-md -z-10"
-                    initial={false}
-                    transition={{
-                      type: "spring",
-                      stiffness: 500,
-                      damping: 30,
-                      bounce: 0.25
-                    }}
-                  />
-                )}
-              </motion.button>
-            ))}
-          </div>
-          {/* Projects List */}
-          <div className="space-y-4 sm:space-y-7">
-            {filteredProjects.map((project, index) => (
-              <div
-                key={index}
-                onMouseEnter={() => setHoveredProject(index)}
-                onMouseLeave={() => setHoveredProject(null)}
-                className="group relative rounded-xl sm:rounded-2xl bg-gradient-to-br from-gray-950 to-gray-900 border border-gray-800 hover:border-cyan-400/30 shadow-inner shadow-black/40 hover:shadow-lg hover:shadow-white/10 transition-all duration-300"
-              >
-                {/* Mobile-only click indicator */}
-                <div className="sm:hidden absolute bottom-3 right-3 flex items-center gap-1 text-xs text-gray-400 animate-pulse">
-                  <MousePointerClick className="w-4 h-4" />
-                  <span>Tap to see more</span>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 sm:gap-6 p-4 sm:p-6 sm:py-8">
-                  {/* Left: Project Number & Category (Mobile Top) */}
-                  <div className="sm:col-span-2 flex flex-row sm:flex-col justify-between items-start sm:items-center">
-                    <div className="text-3xl sm:text-6xl font-light text-gray-100 group-hover:text-gray-600 transition-colors select-none">
-                      {String(index + 1).padStart(2, '0')}
-                    </div>
-                    <div className="sm:mt-4">
-                      <span className="flex items-center gap-2 sm:gap-2 bg-gradient-to-br from-gray-950 to-gray-900 border border-gray-800 px-2 sm:px-3 py-1 rounded-md">
-                        <span className="flex-shrink-0">
-                          {project.category === 'Personal' && <User2 className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400" />}
-                          {project.category === 'Academy' && <School className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400" />}
-                          {project.category === 'Company' && <Building2 className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400" />}
-                        </span>
-                        <p className="text-sm sm:text-lg text-gray-400">
-                          {project.category}
-                        </p>
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Middle: Project Info */}
-                  <div className="sm:col-span-7 space-y-3 sm:space-y-4">
-                    {/* Title & Company */}
-                    <div>
-                      <h2 className="text-lg sm:text-3xl font-bold mb-1 group-hover:text-gray-300 transition-colors">
-                        {project.title}
-                      </h2>
-                      <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-xs sm:text-base text-gray-400">
-                        <span className="flex items-center gap-1">
-                          <Building2 className="w-3 h-3 sm:w-4 sm:h-4" />
-                          {project.companyName}
-                        </span>
-                        <Dot className="w-2 h-2 sm:w-3 sm:h-3" />
-                        <span className="flex items-center gap-1">
-                          <MapPin className="w-3 h-3 sm:w-4 sm:h-4" />
-                          {project.companyLocation}
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* Role & Duration */}
-                    <div className="flex flex-wrap gap-2 sm:gap-4 items-center text-xs text-gray-400">
-                      <span className="flex items-center gap-1 sm:gap-2 bg-gray-800 px-2 sm:px-3 py-1 rounded-md">
-                        <User className="w-3 h-3 sm:w-4 sm:h-4" />
-                        {project.role}
-                      </span>
-                      <span className="flex items-center gap-1 sm:gap-2">
-                        <Clock className="w-3 h-3 sm:w-4 sm:h-4" />
-                        {project.duration}
-                      </span>
-                      <span>•</span>
-                      <span className="flex items-center gap-1 sm:gap-2">
-                        <Box className="w-3 h-3 sm:w-4 sm:h-4" />
-                        {project.projectType}
-                      </span>
-                    </div>
-
-                    {/* Description - Show on Hover */}
-                    <div className={`overflow-hidden transition-all duration-300 ${hoveredProject === index ? 'max-h-40 opacity-100 mt-3' : 'max-h-0 opacity-0'}`}>
-                      <p className="text-xs sm:text-sm text-gray-300 leading-relaxed border-l-2 border-gray-800 pl-3 sm:pl-4">
-                        {project.responsibility}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Right: Tech & Actions (Mobile Bottom) */}
-                  <div className="sm:col-span-3 flex flex-col gap-4 sm:gap-0 justify-between mt-4 sm:mt-0">
-                    {/* Tech Stack */}
-                    <div className="flex flex-wrap gap-2 sm:justify-end cursor-default">
-                      {project.tech.map((tech) => (
-                        <div
-                          key={tech}
-                          className="flex items-center gap-1 p-1 sm:p-2 bg-gray-900 border border-gray-800 text-xs text-gray-400 hover:border-cyan-400/30 hover:-translate-y-0.5 sm:hover:-translate-y-1 transition-all rounded-md"
-                        >
-                          <span>{techIcons[tech]}</span>
-                          <span className="hidden sm:inline">{tech}</span>
-                        </div>
-                      ))}
-                    </div>
-
-                    {/* Action Buttons */}
-                    <div className={`flex gap-2 transition-all duration-300 ${hoveredProject === index || window.innerWidth < 640
-                      ? 'opacity-100 translate-y-0 pointer-events-auto'
-                      : 'opacity-0 translate-y-2 pointer-events-none'
-                      }`}>
-                      <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-1 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 border border-gray-700 text-gray-300 hover:border-white hover:text-white transition-all hover:-translate-y-0.5 sm:hover:-translate-y-1 text-xs sm:text-sm rounded-md"
-                      >
-                        <Github className="w-3 h-3 sm:w-4 sm:h-4" />
-                        <span>Code</span>
-                      </a>
-                      <a
-                        href={project.live}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-1 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-white text-black hover:bg-gray-200 transition-all hover:-translate-y-0.5 sm:hover:-translate-y-1 text-xs sm:text-sm rounded-md"
-                      >
-                        <TvMinimalPlay className="w-3 h-3 sm:w-4 sm:w-4" />
-                        <span>Live</span>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Summary */}
-          <div className="mt-20 pt-8 border-t border-gray-900">
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
-              <div>
-                <p className="text-3xl font-bold">{projects.length}</p>
-                <p className="text-gray-400 mt-1 text-sm">Total Projects</p>
-              </div>
-              <div>
-                <p className="text-3xl font-bold">{new Set(projects.flatMap((p) => p.tech)).size}</p>
-                <p className="text-gray-400 mt-1 text-sm">Technologies</p>
-              </div>
-              <div>
-                <p className="text-3xl font-bold">{categories.length - 1}</p>
-                <p className="text-gray-400 mt-1 text-sm">Categories</p>
-              </div>
-            </div>
-          </div>
+          <h2 className="text-4xl sm:text-5xl md:text-7xl font-black text-white mb-2 tracking-tight">
+            PROFESSIONAL{' '}
+            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-300 to-white">
+              EXPERIENCE
+            </span>
+          </h2>
+          <div className="w-20 sm:w-24 h-px bg-white mx-auto mb-6"></div>
+          <p className="text-lg sm:text-xl text-gray-400 max-w-3xl mx-auto px-4 sm:px-0">
+            Grouped by source. Showcasing innovation, automation, and creative engineering.
+          </p>
         </div>
+
+        {/* Projects grouped by category */}
+        <div className="space-y-8">
+          {Object.entries(groupedProjects).map(([category, categoryProjects]) => (
+            <div key={category}>
+              <CategoryDivider category={category} count={categoryProjects.length} />
+              <div className="space-y-4 sm:space-y-6">
+                {categoryProjects.map((project, index) => (
+                  <ProjectCard key={project.originalIndex} project={project} index={index} />
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     </section>
   );
 }

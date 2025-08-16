@@ -1,8 +1,7 @@
-import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { React, ShadcnUI, TailwindCSS, ViteJS } from 'developer-icons';
-import { Sun, Moon, Mail, ChevronsRight, CloudSun, BriefcaseBusiness } from 'lucide-react';
+import { Mail, ChevronsRight, BriefcaseBusiness } from 'lucide-react';
 import RotatingText from './Reactbits/RotatingText'
 import ShinyText from './Reactbits/ShinyText';
 
@@ -69,8 +68,8 @@ export default function Hero() {
 
       <div className="relative z-10 text-center max-w-6xl mx-auto">
         <div className="mb-8 space-y-4">
-          <h2 className="text-6xl sm:text-6xl md:text-8xl font-extrabold tracking-tight mb-10 leading-tight">
-            <span className="block text-gray-400/80 text-2xl sm:text-xl md:text-3xl font-bold tracking-wide mb-4">
+          <h2 className="text-6xl sm:text-6xl md:text-8xl font-black tracking-tight mb-10">
+            <span className="block text-gray-400/80 text-2xl sm:text-xl md:text-3xl font-bold tracking-tight mb-4">
               {greetingText} <span className="font-light text-gray-300">I'm</span>
             </span>
             <span className="relative inline-block">

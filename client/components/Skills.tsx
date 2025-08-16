@@ -75,7 +75,7 @@ export default function Skills() {
                         transition={{ delay: i * 0.04 }}
                         viewport={{ once: true }}
                         whileHover={{ y: -5 }}
-                        className="group relative rounded-2xl p-5 bg-gradient-to-br from-gray-950 to-gray-900 border border-gray-800 hover:border-cyan-400/30 transition-colors shadow-inner shadow-black/40 hover:shadow-lg hover:shadow-white/10 transition duration-300"
+                        className="group relative rounded-2xl p-5 bg-gradient-to-br from-gray-950 to-gray-900 border border-gray-800 transition-colors shadow-inner shadow-black/40 hover:shadow-lg hover:shadow-white/10 transition duration-300"
                       >
                         {/* Hover glow ring */}
                         <div className="absolute inset-0 rounded-2xl pointer-events-none group-hover:ring-1 group-hover:ring-white/10 transition-all" />
