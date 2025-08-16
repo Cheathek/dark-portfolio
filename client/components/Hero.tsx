@@ -5,15 +5,8 @@ import { React, ShadcnUI, TailwindCSS, ViteJS } from 'developer-icons';
 import { Sun, Moon, Mail, ChevronsRight, CloudSun, BriefcaseBusiness } from 'lucide-react';
 import RotatingText from './Reactbits/RotatingText'
 import ShinyText from './Reactbits/ShinyText';
-import ClickSpark from './Reactbits/ClickSpark';
 
 export default function Hero() {
-  const [typedText, setTypedText] = useState('');
-  const [currentTextIndex, setCurrentTextIndex] = useState(0);
-  const [isTyping, setIsTyping] = useState(true);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const heroRef = useRef<HTMLDivElement>(null);
-  // const texts = ['Full Stack Developer', 'UI/UX Designer', 'Tech Innovator', 'Digital Artist'];
 
   const items = [
     { icon: <React />, color: 'blue', label: 'Files' },
@@ -25,11 +18,11 @@ export default function Hero() {
   const getGreeting = () => {
     const hour = new Date().getHours();
     if (hour >= 5 && hour < 12) {
-      return { text: 'Good morning', Icon: CloudSun, color: '#FCD34D' };
+      return { text: 'Good morning' };
     } else if (hour >= 12 && hour < 18) {
-      return { text: 'Good afternoon', Icon: Sun, color: '#60A5FA' };
+      return { text: 'Good afternoon' };
     } else {
-      return { text: 'Good evening', Icon: Moon, color: '#A78BFA' };
+      return { text: 'Good evening' };
     }
   };
 
@@ -40,46 +33,7 @@ export default function Hero() {
     { icon: <ShadcnUI className="h-10 w-10" />, label: 'Shadcn' },
   ];
 
-  const { text: greetingText, Icon: GreetingIcon, color: iconColor } = getGreeting();
-
-  // useEffect(() => {
-  //   const currentText = texts[currentTextIndex];
-  //   let timeoutId: NodeJS.Timeout;
-
-  //   if (isTyping) {
-  //     if (typedText.length < currentText.length) {
-  //       const speed = 60 + Math.random() * 40;
-  //       timeoutId = setTimeout(() => {
-  //         setTypedText(currentText.slice(0, typedText.length + 1));
-  //       }, speed);
-  //     } else {
-  //       timeoutId = setTimeout(() => {
-  //         setIsTyping(false);
-  //       }, 2000);
-  //     }
-  //   } else {
-  //     if (typedText.length > 0) {
-  //       const deleteSpeed = 25 + Math.random() * 25;
-  //       timeoutId = setTimeout(() => {
-  //         setTypedText(typedText.slice(0, -1));
-  //       }, deleteSpeed);
-  //     } else {
-  //       timeoutId = setTimeout(() => {
-  //         setCurrentTextIndex((prev) => (prev + 1) % texts.length);
-  //         setIsTyping(true);
-  //       }, 300);
-  //     }
-  //   }
-  //   return () => clearTimeout(timeoutId);
-  // }, [typedText, currentTextIndex, isTyping]);
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
+  const { text: greetingText } = getGreeting();
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -89,10 +43,7 @@ export default function Hero() {
   };
 
   return (
-    <section
-      id="hero"
-      ref={heroRef}
-      className="min-h-screen flex items-center justify-center relative overflow-hidden px-4 sm:px-8">
+    <section id="hero" className="min-h-screen flex items-center justify-center relative overflow-hidden px-4 sm:px-6 md:px-8 lg:px-10 pt-28 sm:pt-0">
       {/* Animated Background */}
       <div className="absolute inset-0 bg-black">
         <div className="absolute inset-0 mesh-gradient-bg opacity-30"></div>
@@ -116,125 +67,86 @@ export default function Hero() {
           style={{ animationDelay: '2s' }}></div>
       </div>
 
-      <ClickSpark
-        sparkColor='#fff'
-        sparkSize={10}
-        sparkRadius={15}
-        sparkCount={8}
-        duration={400}
-      >
-        <div className="relative z-10 text-center max-w-6xl mx-auto">
-          <div className="mb-8 space-y-4">
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6 }}
-              className="mt-24 sm:mt-20 flex justify-center">
-              {/* Content wrapper */}
-              <div className="flex items-center gap-5 px-8 py-6">
-                {/* Animated icon circle */}
-                <motion.div
-                  whileHover={{ scale: 1.1 }}
-                  className="p-3 rounded-full bg-gradient-to-br from-cyan-500/15 to-blue-600/15 border border-white/10 shadow-sm"
-                >
-                  <GreetingIcon className="w-6 h-6 text-cyan-300" style={{ color: iconColor }} />
-                </motion.div>
-                {/* Text stack */}
-                <div className="flex flex-col">
-                  <motion.span
-                    initial={{ x: -10 }}
-                    animate={{ x: 0 }}
-                    className="text-xs uppercase tracking-[0.2em] font-medium mb-1">
-                    {greetingText}
-                  </motion.span>
-                  <motion.h2
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.2 }}
-                    className="text-3xl font-light text-white leading-tight">
-                    My name is
-                  </motion.h2>
-                </div>
-              </div>
-            </motion.div>
+      <div className="relative z-10 text-center max-w-6xl mx-auto">
+        <div className="mb-8 space-y-4">
+          <h2 className="text-6xl sm:text-6xl md:text-8xl font-extrabold tracking-tight mb-10 leading-tight">
+            <span className="block text-gray-400/80 text-2xl sm:text-xl md:text-3xl font-bold tracking-wide mb-4">
+              {greetingText} <span className="font-light text-gray-300">I'm</span>
+            </span>
+            <span className="relative inline-block">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-200 via-white to-gray-300">
+                SOCHEATH
+              </span>
+            </span>
+          </h2>
 
-            <h2 className="text-5xl sm:text-6xl md:text-8xl italic font-black text-white tracking-tight mb-4">
-              SOCHEATH EK
-              <motion.span className="block text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-300 to-white">
-                MAO
-              </motion.span>
-            </h2>
-
-            <div className="text-xl sm:text-2xl md:text-4xl text-gray-300 mb-6 h-16 flex items-center justify-center">
-              <div className="font-black flex flex-col items-center">
-                <span className="relative">
-                  I'm a <span className="relative inline-block">
-                    <RotatingText
-                      texts={['Full Stack Developer', 'UI/UX Designer', 'Tech Innovator', 'Digital Artist']}
-                      mainClassName="px-2 sm:px-2 md:px-3 bg-white/10 border border-white/10 rounded-lg text-white overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg"
-                      staggerFrom={"last"}
-                      initial={{ y: "100%" }}
-                      animate={{ y: 0 }}
-                      exit={{ y: "-120%" }}
-                      staggerDuration={0.025}
-                      splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
-                      transition={{ type: "spring", damping: 30, stiffness: 400 }}
-                      rotationInterval={4000}
-                    />
-                  </span>
+          <div className="text-2xl sm:text-2xl md:text-3xl text-gray-300 mb-6 h-16 flex items-center justify-center">
+            <div className="flex flex-col items-center cursor-default">
+              <span className="relative">
+                I'm a <span className="relative inline-block">
+                  <RotatingText
+                    texts={['Full Stack Developer', 'UI/UX Designer', 'Tech Innovator', 'Digital Artist']}
+                    mainClassName="font-semibold px-2 sm:px-2 md:px-3 bg-white/10 border border-white/10 rounded-lg text-white overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg"
+                    staggerFrom={"last"}
+                    initial={{ y: "100%" }}
+                    animate={{ y: 0 }}
+                    exit={{ y: "-120%" }}
+                    staggerDuration={0.025}
+                    splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
+                    transition={{ type: "spring", damping: 30, stiffness: 300 }}
+                    rotationInterval={4000}
+                  />
                 </span>
-              </div>
-            </div>
-          </div>
-
-          <p className="text-base sm:text-lg md:text-xl text-gray-400 mb-12 max-w-3xl mx-auto leading-relaxed px-2">
-            <ShinyText text="Crafting extraordinary digital experiences through innovative design, cutting-edge technology,
-          and a passion for pushing the boundaries of what's possible." disabled={false} speed={3} className='custom-class' />
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-6 justify-center mb-16">
-            <Button
-              size="lg"
-              className="group relative px-8 py-4 bg-white text-black hover:bg-gray-50 text-lg font-semibold glow-effect"
-              onClick={() => scrollToSection('experience')}
-            >
-              <BriefcaseBusiness className="mr-2 h-5 w-5 group-hover:rotate-12 transition-transform" />
-              View My Work
-              <ChevronsRight className="ml-2 h-5 w-5 group-hover:translate-x-5 transition-transform" />
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="group px-8 py-4 border-white/30 text-white hover:bg-white hover:text-black text-lg font-semibold glass-effect"
-              onClick={() => scrollToSection('contact')}
-            >
-              <Mail className="mr-2 h-5 w-5 group-hover:rotate-12 transition-transform" />
-              Let's Connect
-            </Button>
-          </div>
-
-          {/* Tech Stack Showcase */}
-          <div className="flex flex-col items-center gap-6">
-            <h2 className="text-xl sm:text-2xl font-semibold text-white">
-              This Portfolio Was Built With
-            </h2>
-
-            <div className="flex flex-wrap justify-center cursor-default gap-6">
-              {techStack.map((tech, index) => (
-                <motion.div
-                  key={index}
-                  className="flex items-center gap-2 p-3 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-colors duration-300"
-                  // whileHover={{ scale: 1.05 }}
-                  whileHover={{ scale: 1.05, rotate: 2 }}
-                >
-                  {tech.icon}
-                  <span className="text-sm text-gray-300">{tech.label}</span>
-                </motion.div>
-              ))}
+              </span>
             </div>
           </div>
         </div>
-      </ClickSpark>
+
+        <p className="text-base sm:text-lg md:text-xl text-gray-400 mb-12 max-w-3xl mx-auto leading-relaxed px-2">
+          <ShinyText text="Crafting extraordinary digital experiences through innovative design, cutting-edge technology,
+          and a passion for pushing the boundaries of what's possible." disabled={false} speed={3} className='custom-class' />
+        </p>
+
+        <div className="flex flex-col sm:flex-row gap-6 justify-center mb-16">
+          <Button
+            size="lg"
+            className="group relative px-8 py-4 bg-white text-black hover:bg-gray-50 text-lg font-semibold glow-effect"
+            onClick={() => scrollToSection('experience')}>
+            <BriefcaseBusiness className="mr-2 h-5 w-5 group-hover:rotate-12 transition-transform" />
+            View My Work
+            <ChevronsRight className="ml-2 h-5 w-5 group-hover:translate-x-5 transition-transform" />
+          </Button>
+          <Button
+            size="lg"
+            variant="outline"
+            className="group relative px-8 py-4 border-white/30 text-white text-lg font-semibold glass-effect overflow-hidden"
+            onClick={() => scrollToSection('contact')}>
+            {/* Holographic sweep effect */}
+            <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 -translate-x-full group-hover:translate-x-full transition-all duration-700" />
+            <Mail className="mr-2 h-5 w-5 group-hover:rotate-12 transition-transform z-10" />
+            <span className="z-10">Let's Connect</span>
+          </Button>
+        </div>
+
+        {/* Tech Stack Showcase */}
+        <div className="flex flex-col items-center">
+          <h2 className="text-xl sm:text-2xl font-semibold text-white">
+            This Portfolio Was Built With
+          </h2>
+          <div className="flex flex-wrap justify-center cursor-default mt-7 gap-8">
+            {techStack.map((tech, index) => (
+              <motion.div
+                key={index}
+                className="flex items-center gap-2 p-3 bg-black/0 backdrop-blur-xs border border-white/10 rounded-lg hover:bg-white/10 transition-colors duration-300"
+                whileHover={{ scale: 1.05, rotate: -3 }}
+              >
+                {tech.icon}
+                <span className="text-sm text-gray-300">{tech.label}</span>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
     </section>
   );
 }

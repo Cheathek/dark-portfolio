@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from "framer-motion";
-import { AtSign, BriefcaseBusiness, Code2, Home, Mail, Menu, MessageCircle, SendHorizonal, User2Icon, X } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { BriefcaseBusiness, Code2, Download, Home, Mail, Menu, User2Icon, X } from 'lucide-react';
 
 export function NavBar() {
   const [activeSection, setActiveSection] = useState('hero');
@@ -10,9 +9,7 @@ export function NavBar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Handle navbar background opacity
       setIsScrolled(window.scrollY > 50);
-      // Handle active section highlighting
       const sections = ['hero', 'about', 'skills', 'experience', 'contact'];
       const scrollPosition = window.scrollY + 100;
 
@@ -54,68 +51,60 @@ export function NavBar() {
   return (
     <>
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
-        ? 'bg-black/80 backdrop-blur-lg border-b border-white/10 shadow-2xl'
+        ? 'bg-black/10 backdrop-blur-lg border-b border-white/20 shadow-2xl'
         : 'bg-transparent'
         }`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto px-4 sm:px-6 lg:px-32">
           <div className="flex items-center justify-between h-20">
-            {/* Logo */}
-            <button
-              onClick={() => scrollToSection('hero')}
-              className="flex items-center space-x-3 text-white font-bold text-xl hover:text-cyan-300 transition-colors group"
-            >
-              <div className="relative">
-                <Code2 className="w-8 h-8 group-hover:rotate-12 transition-transform duration-300" />
-                <div className="absolute inset-0 bg-cyan-400/20 rounded-full blur-lg group-hover:bg-cyan-400/40 transition-all duration-300"></div>
-              </div>
-              <span className="hidden sm:block">SOCHEATH</span>
-            </button>
-
-            {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center space-x-3"> {/* increased space-x a bit */}
-              {navItems.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => scrollToSection(item.id)}
-                  className={`relative px-6 py-3 text-sm font-medium transition-all duration-300 rounded-full group flex items-center justify-center ${activeSection === item.id
-                    ? 'text-black bg-white'
-                    : 'text-gray-300 hover:text-white hover:bg-white/10'
-                    }`}
-                  style={{ zIndex: activeSection === item.id ? 10 : 'auto' }}
-                >
-                  {item.icon && (
-                    <span className="flex items-center justify-center mr-2">
-                      <item.icon className="h-4 w-4" />
-                    </span>
-                  )}
-                  {item.label}
-
-                  {activeSection === item.id && (
-                    <motion.div
-                      layoutId="active-pill"
-                      animate={{ boxShadow: "0 0 0.5rem rgba(255,255,255,0.8)" }}
-                      className="absolute inset-0 bg-white rounded-full shadow-md"
-                      transition={{ type: "spring", stiffness: 300, damping: 15 }}
-                      style={{ zIndex: -1 }}
-                    />
-                  )}
-                </button>
-              ))}
-            </div>
-            {/* Desktop CTA */}
-            <div className="hidden lg:flex items-center space-x-4">
-              {/* // className="group relative px-8 py-4 bg-white text-black hover:bg-gray-50 text-lg font-semibold glow-effect" */}
-              <Button
-                size="lg"
-                className="group flex items-center gap-2 px-5 py-3 rounded-lg text-white bg-gray-800/60 border border-white/60 hover:border-cyan-400 hover:bg-gray-800/80 transition-all duration-300"
-                onClick={() => scrollToSection('contact')}
+            {/* Logo - Left Side */}
+            <div className="flex-1 flex items-center">
+              <button
+                onClick={() => scrollToSection('hero')}
+                className="flex items-center space-x-3 text-white font-bold text-xl hover:text-cyan-300 transition-all duration-300 group"
               >
-                Let's Talk
-                <AtSign className="h-5 w-5 transform transition-transform duration-300 group-hover:rotate-45" />
-              </Button>
+                <div className="relative w-8 h-8">
+                  <img
+                    src="/favicon.png"
+                    alt="Logo"
+                    width={32}
+                    height={32}
+                    className="w-full h-full object-contain group-hover:rotate-12 transition-transform duration-300 hover:transition-all"
+                  />
+                </div>
+                <span className="hidden sm:block tracking-tighter">SOCHEATH</span>
+              </button>
             </div>
-            {/* Mobile Menu Button */}
-            <div className="lg:hidden">
+
+            {/* Desktop Navigation - Right Side */}
+            <div className="flex-1 flex justify-end">
+              <div className="flex-1 flex justify-end">
+                <div className="hidden lg:flex items-center gap-4">
+                  {navItems.map((item) => (
+                    <button
+                      key={item.id}
+                      onClick={() => scrollToSection(item.id)}
+                      className={`relative px-4 py-2.5 text-sm font-medium transition-all duration-300 rounded-2xl group flex items-center ${activeSection === item.id
+                          ? 'text-white bg-gray-800'
+                          : 'text-gray-300 hover:text-white hover:bg-white/10'
+                        }`}
+                    >
+                      {item.icon && <item.icon className="h-4 w-4 mr-2" />}
+                      {item.label}
+                      {activeSection === item.id && (
+                        <motion.div
+                          layoutId="active-pill"
+                          className="absolute inset-0 bg-gray-800 rounded-2xl -z-10 border border-gray-700"
+                          transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                        />
+                      )}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Mobile Menu Button - Right Side */}
+            <div className="lg:hidden flex-1 flex justify-end">
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 className="text-white hover:text-cyan-300 transition-colors p-2"
@@ -153,15 +142,6 @@ export function NavBar() {
                 {item.label}
               </button>
             ))}
-            <div className="pt-3 border-t border-white/10">
-              <Button
-                onClick={() => scrollToSection('contact')}
-                className="flex items-center justify-center w-full gap-2 py-2.5 bg-transparent border border-gray-50 text-gray-50 hover:bg-gray-50 hover:text-black font-semibold"
-              >
-                <MessageCircle className="h-5 w-5" />
-                Let's Talk
-              </Button>
-            </div>
           </div>
         </div>
       </nav>

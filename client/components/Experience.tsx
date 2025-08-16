@@ -24,7 +24,6 @@ const techIcons: Record<string, React.ReactNode> = {
   ViteJS: <ViteJS className="w-6 h-6" />,
   ShadcnUI: <ShadcnUI className="w-6 h-6" />,
 };
-import ClickSpark from './Reactbits/ClickSpark';
 
 export default function Projects() {
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -116,15 +115,8 @@ export default function Projects() {
     selectedCategory === 'All' ? projects : projects.filter((p) => p.category === selectedCategory);
 
   return (
-    <section id="experience" className="min-h-screen bg-black relative overflow-hidden text-white">
-      <ClickSpark
-        sparkColor='#fff'
-        sparkSize={10}
-        sparkRadius={15}
-        sparkCount={8}
-        duration={400}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 py-16">
+    <section id="experience" className="overflow-hidden pt-28 px-2 relative">
+        <div className="max-w-7xl mx-auto relative z-10">
           {/* Header */}
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/5 border border-white/20 mb-4 mx-auto max-w-max">
@@ -133,11 +125,11 @@ export default function Projects() {
             </div>
             <h2 className="text-4xl sm:text-5xl md:text-7xl font-black text-white mb-2 tracking-tight">
               PROFESSIONAL{' '}
-              <motion.span
+              <span
                 className="block text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-300 to-white"
               >
                 EXPERIENCE
-              </motion.span>
+              </span>
             </h2>
             <div className="w-20 sm:w-24 h-px bg-white mx-auto mb-6"></div>
             <p className="text-lg sm:text-xl text-gray-400 max-w-3xl mx-auto px-4 sm:px-0">
@@ -323,7 +315,6 @@ export default function Projects() {
             </div>
           </div>
         </div>
-      </ClickSpark>
     </section>
   );
 }

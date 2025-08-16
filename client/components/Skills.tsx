@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { TypeScript, Python, React, Figma, GitHubLight, WordPress, JavaScript, HTML5, CSS3, Bootstrap5, TailwindCSS, VueJs, VisualStudioCode, Canva, Laravel, PHP, Jira, Photoshop } from "developer-icons";
 import { Terminal } from "lucide-react";
-import ClickSpark from "./Reactbits/ClickSpark";
 
 export default function Skills() {
   const skills = [
@@ -30,15 +29,8 @@ export default function Skills() {
   const groups = ["Programming Languages", "Frameworks & Libraries", "Tools & Platforms"];
 
   return (
-    <section id="skills" className="overflow-hidden py-32 px-4 relative">
-      <div className="max-w-6xl mx-auto">
-        <ClickSpark
-          sparkColor='#fff'
-          sparkSize={10}
-          sparkRadius={15}
-          sparkCount={8}
-          duration={400}
-        >
+    <section id="skills" className="overflow-hidden pt-28 px-2 relative">
+      <div className="max-w-7xl mx-auto relative z-10">
           {/* Header */}
           <div className="text-center mb-20">
             <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/5 border border-white/20 mb-4">
@@ -47,11 +39,11 @@ export default function Skills() {
             </div>
             <h2 className="text-5xl md:text-7xl font-black text-white mb-2 tracking-tight">
               TECHNICAL
-              <motion.span
+              <span
                 className="block text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-300 to-white"
               >
                 EXPERTISE
-              </motion.span>
+              </span>
             </h2>
             <div className="w-24 h-px bg-white mx-auto mb-8"></div>
 
@@ -65,7 +57,6 @@ export default function Skills() {
             return (
               <div key={groupName} className="mb-20">
                 <div className="flex items-center mb-10">
-                  <div className="w-12 h-px bg-white/40" />
                   <h3 className="mx-4 text-2xl font-semibold uppercase tracking-wider">
                     {groupName}
                   </h3>
@@ -127,7 +118,6 @@ export default function Skills() {
               </div>
             );
           })}
-        </ClickSpark>
       </div>
     </section>
   );
