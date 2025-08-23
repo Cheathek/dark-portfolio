@@ -128,11 +128,10 @@ ${data.message}
               <span className="block text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-300 to-white">TOUCH</span>
             </h2>
             <div className="w-24 h-px bg-white mx-auto mb-8"></div>
-            <p className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-lg sm:text-xl md:text-xl text-gray-200 max-w-2xl mx-auto leading-relaxed">
               Ready to bring your vision to life? Let's discuss your next project and create something extraordinary together.
             </p>
           </div>
-
           {/* Grid */}
           <div className="grid lg:grid-cols-12 gap-12">
             {/* Contact Info */}
@@ -154,8 +153,12 @@ ${data.message}
                 <a
                   key={c.label}
                   href={c.href}
+                  data-aos="fade-right"
+                  data-aos-delay={i * 400}
+                  data-aos-duration="600"
                   className="group relative overflow-hidden block p-6 rounded-2xl bg-gradient-to-br from-gray-950 to-gray-900 border border-gray-800 hover:border-gray-700 backdrop-blur-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-white/5"
-                  style={{ animationDelay: `${i * 100}ms` }}>
+                  style={{ animationDelay: `${i * 100}ms` }} // you can keep or remove this inline animationDelay if it's unused
+                >
                   {/* Dark holographic sweep effect */}
                   <div className="absolute inset-0 overflow-hidden rounded-2xl">
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-700/50 to-transparent opacity-0 group-hover:opacity-100 -translate-x-full group-hover:translate-x-full transition-all duration-700" />
@@ -176,14 +179,12 @@ ${data.message}
                 </a>
               ))}
             </div>
-
             {/* Form */}
-            <div className="lg:col-span-7">
+            <div className="lg:col-span-7" data-aos='fade-left' data-aos-duration='600'>
               <div className="relative backdrop-blur-sm bg-gradient-to-br from-gray-950 to-gray-900 border border-gray-800 rounded-3xl py-8 px-4 lg:p-12">
                 <div className="absolute inset-0 bg-gradient-to-br from-white/[0.02] to-transparent rounded-3xl"></div>
                 <div className="absolute -top-px left-8 w-16 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
                 <div className="absolute -right-px top-8 w-px h-16 bg-gradient-to-b from-transparent via-white/20 to-transparent"></div>
-
                 <div className="relative z-10">
                   <div className="mb-10">
                     <div className="flex items-center gap-3 mb-4">

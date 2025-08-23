@@ -142,107 +142,109 @@ export default function Projects() {
     );
   };
 
-  const ProjectCard = ({ project, index }: { project: typeof projects[0] & { originalIndex: number }; index: number }) => (
-    <div
-      onMouseEnter={() => setHoveredProject(project.originalIndex)}
-      onMouseLeave={() => setHoveredProject(null)}
-      className="group relative rounded-xl sm:rounded-2xl bg-gradient-to-br from-gray-950 to-gray-900 border border-gray-800 shadow-inner shadow-black/40 hover:shadow-lg hover:shadow-white/10 transition-all duration-300"
-    >
-      <div className="sm:hidden absolute bottom-3 right-3 flex items-center gap-1 text-xs text-gray-400 animate-pulse">
-        <MousePointerClick className="w-4 h-4" />
-        <span>Tap to see more</span>
-      </div>
-
-      <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 sm:gap-6 p-4 sm:p-6 sm:py-8">
-        {/* Project Number */}
-        <div className="sm:col-span-1 flex justify-center items-center">
-          <div className="text-2xl sm:text-4xl font-light text-gray-100 group-hover:text-gray-600 transition-colors select-none">
-            {String(index + 1).padStart(2, '0')}
-          </div>
+  const ProjectCard = ({ project, index }: { project: typeof projects[0] & { originalIndex: number }; index: number }) => {
+    const [hoveredProject, setHoveredProject] = useState<number | null>(null);
+    return (
+      <div
+        onMouseEnter={() => setHoveredProject(project.originalIndex)}
+        onMouseLeave={() => setHoveredProject(null)}
+        className="group relative rounded-xl sm:rounded-2xl bg-gradient-to-br from-gray-950 to-gray-900 border border-gray-800 shadow-inner shadow-black/40 hover:shadow-lg hover:shadow-white/10 transition-all duration-300"
+      >
+        <div className="sm:hidden absolute bottom-3 right-3 flex items-center gap-1 text-xs text-gray-400 animate-pulse">
+          <MousePointerClick className="w-4 h-4" />
+          <span>Tap to see more</span>
         </div>
 
-        {/* Project Info */}
-        <div className="sm:col-span-8 space-y-3 sm:space-y-4">
-          <div>
-            <h2 className="text-lg sm:text-2xl font-bold mb-1 group-hover:text-gray-300 transition-colors">
-              {project.title}
-            </h2>
-            <div className="flex flex-wrap items-center gap-2 text-xs sm:text-sm text-gray-400">
-              <span className="flex items-center gap-1">
-                <Building2 className="w-3 h-3 sm:w-4 sm:h-4" />
-                {project.companyName}
-              </span>
-              <Dot className="w-2 h-2" />
-              <span className="flex items-center gap-1">
-                <MapPin className="w-3 h-3 sm:w-4 sm:h-4" />
-                {project.companyLocation}
-              </span>
+        <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 sm:gap-6 p-4 sm:p-6 sm:py-8">
+          {/* Project Number */}
+          <div className="sm:col-span-1 flex justify-center items-center">
+            <div className="text-2xl sm:text-4xl font-light text-gray-100 group-hover:text-gray-600 transition-colors select-none">
+              {String(index + 1).padStart(2, '0')}
             </div>
           </div>
 
-          <div className="flex flex-wrap gap-2 items-center text-xs text-gray-400">
-            <span className="flex items-center gap-1 bg-gray-800 px-2 py-1 rounded-md">
-              <User className="w-3 h-3" />
-              {project.role}
-            </span>
-            <span className="flex items-center gap-1">
-              <Clock className="w-3 h-3" />
-              {project.duration}
-            </span>
-            <span>•</span>
-            <span className="flex items-center gap-1">
-              <Box className="w-3 h-3" />
-              {project.projectType}
-            </span>
-          </div>
-          <div className={`overflow-hidden transition-all duration-300 ${hoveredProject === project.originalIndex ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'
-            }`}>
-            <p className="text-xs sm:text-sm text-gray-300 leading-relaxed border-l-2 border-gray-800 pl-3">
-              {project.responsibility}
-            </p>
-          </div>
-        </div>
-
-        {/* Tech Stack & Actions */}
-        <div className="sm:col-span-3 flex flex-col justify-between gap-4">
-          <div className="flex flex-wrap gap-2 sm:justify-end cursor-default">
-            {project.tech.map((tech) => (
-              <div
-                key={tech}
-                className="flex items-center gap-1 p-1 sm:p-2 bg-gray-900 border border-gray-800 text-sm text-gray-400 hover:-translate-y-0.5 transition-all rounded-md"
-              >
-                {techIcons[tech]}
-                <span className="hidden sm:inline">{tech}</span>
+          {/* Project Info */}
+          <div className="sm:col-span-8 space-y-3 sm:space-y-4">
+            <div>
+              <h2 className="text-lg sm:text-2xl font-bold mb-1 group-hover:text-gray-300 transition-colors">
+                {project.title}
+              </h2>
+              <div className="flex flex-wrap items-center gap-2 text-base font-normal text-slate-400 leading-tight">
+                <span className="flex items-center gap-1">
+                  <Building2 className="w-4 h-4 sm:w-4 sm:h-4" />
+                  {project.companyName}
+                </span>
+                <Dot className="w-2 h-2" />
+                <span className="flex items-center gap-1">
+                  <MapPin className="w-4 h-4 sm:w-4 sm:h-4" />
+                  {project.companyLocation}
+                </span>
               </div>
-            ))}
+            </div>
+
+            <div className="flex flex-wrap gap-2 items-center text-base font-normal text-slate-400 leading-tight">
+              <span className="flex items-center gap-1 bg-gray-800 px-2 py-1 rounded-md">
+                <User className="w-4 h-4" />
+                {project.role}
+              </span>
+              <span className="flex items-center gap-1">
+                <Clock className="w-4 h-4" />
+                {project.duration}
+              </span>
+              <span>•</span>
+              <span className="flex items-center gap-1 ">
+                <Box className="w-4 h-4" />
+                {project.projectType}
+              </span>
+            </div>
+
+            {/* Smooth expanding description */}
+            <div className={`overflow-hidden transition-all duration-700 ease-in-out ${hoveredProject === project.originalIndex ? 'max-h-60 opacity-100' : 'max-h-0 opacity-0'}`}>
+              <p className="text-md sm:text-md text-gray-300 leading-relaxed border-l-2 border-slate-600 pl-3">
+                {project.responsibility}
+              </p>
+            </div>
           </div>
-          <div className={`flex gap-2 transition-all duration-300 ${hoveredProject === project.originalIndex || window.innerWidth < 640
-            ? 'opacity-100 translate-y-0 pointer-events-auto'
-            : 'opacity-0 translate-y-2 pointer-events-none'
-            }`}>
-            <a
-              href={project.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1 px-3 py-1.5 border border-gray-700 text-gray-300 hover:border-white hover:text-white transition-all hover:-translate-y-0.5 text-md rounded-md"
-            >
-              <Github className="w-4 h-4" />
-              <span>Code</span>
-            </a>
-            <a
-              href={project.live}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1 px-3 py-1.5 bg-white text-black hover:bg-gray-200 transition-all hover:-translate-y-0.5 text-md rounded-md"
-            >
-              <TvMinimalPlay className="w-4 h-4" />
-              <span>Live</span>
-            </a>
+
+          {/* Tech Stack & Actions */}
+          <div className="sm:col-span-3 flex flex-col justify-between gap-4">
+            <div className="flex flex-wrap gap-2 sm:justify-end cursor-default">
+              {project.tech.map((tech) => (
+                <div
+                  key={tech}
+                  className="flex items-center gap-1 p-1 sm:p-2 bg-gray-900 border border-gray-800 text-sm text-gray-400 hover:-translate-y-0.5 transition-all rounded-md"
+                >
+                  {techIcons[tech]}
+                  <span className="hidden sm:inline">{tech}</span>
+                </div>
+              ))}
+            </div>
+
+            <div className={`flex gap-2 transition-all duration-500 ease-in-out ${hoveredProject === project.originalIndex || window.innerWidth < 640 ? 'max-h-16 opacity-100' : 'max-h-0 opacity-0'}`}>
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1 px-3 py-1.5 border border-gray-700 text-gray-300 hover:border-white hover:text-white transition-all hover:-translate-y-0.5 text-md rounded-md"
+              >
+                <Github className="w-4 h-4" />
+                <span>Code</span>
+              </a>
+              <a
+                href={project.live}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1 px-3 py-1.5 bg-white text-black hover:bg-gray-200 transition-all hover:-translate-y-0.5 text-md rounded-md"
+              >
+                <TvMinimalPlay className="w-4 h-4" />
+                <span>Live</span>
+              </a>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  };
 
   return (
     <section id="experience" className="overflow-hidden pt-28 px-2 relative">
@@ -260,7 +262,7 @@ export default function Projects() {
             </span>
           </h2>
           <div className="w-20 sm:w-24 h-px bg-white mx-auto mb-6"></div>
-          <p className="text-lg sm:text-xl text-gray-400 max-w-3xl mx-auto px-4 sm:px-0">
+          <p className="text-lg sm:text-xl md:text-xl text-gray-200 max-w-2xl mx-auto leading-relaxed">
             Grouped by source. Showcasing innovation, automation, and creative engineering.
           </p>
         </div>
@@ -272,7 +274,14 @@ export default function Projects() {
               <CategoryDivider category={category} count={categoryProjects.length} />
               <div className="space-y-4 sm:space-y-6">
                 {categoryProjects.map((project, index) => (
-                  <ProjectCard key={project.originalIndex} project={project} index={index} />
+                  <div
+                    key={project.originalIndex}
+                    data-aos="fade-up"
+                    data-aos-delay={index * 100} // delay increases by 100ms per item
+                    data-aos-duration="600"
+                  >
+                    <ProjectCard project={project} index={index} />
+                  </div>
                 ))}
               </div>
             </div>

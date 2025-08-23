@@ -83,44 +83,50 @@ export default function Hero() {
             <div className="flex flex-col items-center cursor-default">
               <span className="relative">
                 I'm a <span className="relative inline-block">
-                  <RotatingText
-                    texts={['Full Stack Developer', 'UI/UX Designer', 'Tech Innovator', 'Digital Artist']}
-                    mainClassName="font-semibold px-2 sm:px-2 md:px-3 bg-white/10 border border-white/10 rounded-lg text-white overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg"
-                    staggerFrom={"last"}
+                  <motion.div
                     initial={{ y: "100%" }}
                     animate={{ y: 0 }}
-                    exit={{ y: "-120%" }}
-                    staggerDuration={0.025}
-                    splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
-                    transition={{ type: "spring", damping: 30, stiffness: 300 }}
-                    rotationInterval={4000}
-                  />
+                    exit={{ y: "-110%" }}
+                    transition={{ type: "spring", damping: 20, stiffness: 200 }}
+                  >
+                    <RotatingText
+                      texts={['Full Stack Developer', 'UI/UX Designer', 'Tech Innovator', 'Digital Artist']}
+                      mainClassName="font-semibold px-2 sm:px-2 md:px-3 bg-white/10 border border-white/10 rounded-lg text-white overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg"
+                      staggerFrom={"last"}
+                      staggerDuration={0.025}
+                      splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
+                      rotationInterval={4000}
+                    />
+                  </motion.div>
                 </span>
               </span>
             </div>
           </div>
         </div>
 
-        <p className="text-base sm:text-lg md:text-xl text-gray-400 mb-12 max-w-3xl mx-auto leading-relaxed px-2">
-          <ShinyText text="Crafting extraordinary digital experiences through innovative design, cutting-edge technology,
-          and a passion for pushing the boundaries of what's possible." disabled={false} speed={3} className='custom-class' />
-        </p>
+        <div className="text-base sm:text-lg md:text-xl text-gray-200 mb-12 max-w-3xl mx-auto leading-relaxed px-2">
+          <ShinyText
+            text="Crafting extraordinary digital experiences through innovative design, cutting-edge technology, and a passion for pushing the boundaries of what's possible."
+            disabled={false} speed={4} className="custom-class"
+          />
+        </div>
 
         <div className="flex flex-col sm:flex-row gap-6 justify-center mb-16">
           <Button
             size="lg"
-            className="group relative px-8 py-4 bg-white text-black hover:bg-gray-50 text-lg font-semibold glow-effect"
-            onClick={() => scrollToSection('experience')}>
-            <BriefcaseBusiness className="mr-2 h-5 w-5 group-hover:rotate-12 transition-transform" />
-            View My Work
-            <ChevronsRight className="ml-2 h-5 w-5 group-hover:translate-x-5 transition-transform" />
+            onClick={() => scrollToSection('experience')}
+            className="group relative overflow-hidden px-8 py-4 bg-white/10 text-white border border-white/10 backdrop-blur-md hover:bg-white/10 hover:border-white/20 text-lg font-semibold transition-all duration-300"
+          >
+            <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-0 group-hover:opacity-100 -translate-x-full group-hover:translate-x-full transition-all duration-700 pointer-events-none" />
+            <BriefcaseBusiness className="mr-2 h-5 w-5 group-hover:rotate-12 transition-transform relative z-10" />
+            <span className="relative z-10">View My Work</span>
+            <ChevronsRight className="ml-2 h-5 w-5 group-hover:translate-x-2 transition-transform relative z-10" />
           </Button>
           <Button
             size="lg"
             variant="outline"
-            className="group relative px-8 py-4 border-white/30 text-white text-lg font-semibold glass-effect overflow-hidden"
+            className="group relative px-8 py-4 border-white/30 bg-transparent text-white text-lg font-semibold overflow-hidden"
             onClick={() => scrollToSection('contact')}>
-            {/* Holographic sweep effect */}
             <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 -translate-x-full group-hover:translate-x-full transition-all duration-700" />
             <Mail className="mr-2 h-5 w-5 group-hover:rotate-12 transition-transform z-10" />
             <span className="z-10">Let's Connect</span>
@@ -136,7 +142,7 @@ export default function Hero() {
             {techStack.map((tech, index) => (
               <motion.div
                 key={index}
-                className="flex items-center gap-2 p-3 bg-black/0 backdrop-blur-xs border border-white/10 rounded-lg hover:bg-white/10 transition-colors duration-300"
+                className="flex items-center gap-2 p-3 bg-slate-800 backdrop-blur-xs border border-white/10 rounded-lg hover:bg-slate-700 transition-colors duration-300"
                 whileHover={{ scale: 1.05, rotate: -3 }}
               >
                 {tech.icon}

@@ -95,7 +95,7 @@ export default function About() {
     <section id="about" className="overflow-hidden pt-28 px-2 relative">
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Header Section */}
-        <div className="text-center mb-20">
+        <div className="text-center mb-12">
           <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/5 border border-white/20 mb-4">
             <User className="w-5 h-5" />
             <span className="text-sm text-white font-medium tracking-wide">
@@ -109,8 +109,7 @@ export default function About() {
             </span>
           </h2>
           <div className="w-24 h-px bg-white mx-auto mb-8"></div>
-
-          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+          <p className="text-lg sm:text-xl md:text-xl max-w-2xl mx-auto text-gray-200 leading-relaxed">
             My toolkit for building scalable, beautiful experiences.
           </p>
         </div>
@@ -120,7 +119,7 @@ export default function About() {
           {/* Left Column - Profile & Contact */}
           <div className="lg:col-span-4 space-y-8">
             {/* Profile Card */}
-            <div className="bg-gradient-to-br from-gray-900 to-black rounded-2xl p-8 border border-white/10 shadow-xl">
+            <div className="bg-gradient-to-br from-gray-900 to-black rounded-2xl p-8 border border-white/10 shadow-xl" data-aos='fade-right' data-aos-duration='600'>
               <div className="flex flex-col items-center">
                 <div className="relative mb-6">
                   <div className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-400 to-blue-600 blur-md opacity-60 animate-spin-slow" />
@@ -186,10 +185,8 @@ export default function About() {
             </div>
 
             {/* Contact Information */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
+            <div
+              data-aos='fade-up' data-aos-duration='600'
               className="bg-gradient-to-br from-gray-900 to-black rounded-2xl p-8 border border-white/10 shadow-xl"
             >
               <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
@@ -217,18 +214,18 @@ export default function About() {
                   </motion.a>
                 ))}
               </div>
-            </motion.div>
+            </div>
           </div>
 
           {/* Right Column - Main Content */}
           <div className="lg:col-span-8 space-y-8">
             {/* My Journey */}
-            <div className="bg-gradient-to-br from-gray-900 to-black rounded-2xl p-8 border border-white/10 shadow-xl">
+            <div className="bg-gradient-to-br from-gray-900 to-black rounded-2xl p-8 border border-white/10 shadow-xl" data-aos='fade-left' data-aos-duration='600' data-aos-delay='400'>
               <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
                 <Sprout className="w-6 h-6" />
                 My Professional Journey
               </h3>
-              <div className="prose prose-invert max-w-none">
+              <div className="text-lg sm:text-xl md:text-xl text-gray-200 leading-relaxed max-w-none">
                 <p className="text-gray-300 mb-4">{journey}</p>
                 <p className="text-gray-300 mb-4">
                   I specialize in React, Node.js, and cloud technologies, but
@@ -248,7 +245,7 @@ export default function About() {
             {/* Education & Experience */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* Education */}
-              <div className="bg-gradient-to-br from-gray-900 to-black rounded-2xl p-8 border border-white/10 shadow-xl">
+              <div className="bg-gradient-to-br from-gray-900 to-black rounded-2xl p-8 border border-white/10 shadow-xl" data-aos='fade-up' data-aos-duration='600' data-aos-delay='200' >
                 <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
                   <GraduationCap className="w-6 h-6" />
                   Education
@@ -263,7 +260,7 @@ export default function About() {
                       <div className="absolute left-0 transform -translate-x-1/2 w-4 h-4 rounded-full bg-stone-50 top-1" />
                       {/* Education Content (Text on the right) */}
                       <div className="">
-                        <h4 className="text-lg font-bold text-white mb-1">
+                        <h4 className="text-lg sm:text-xl md:text-xl text-gray-200 leading-relaxed">
                           {edu.degree}
                         </h4>
                         <p className="text-gray-400 mb-1">{edu.school}</p>
@@ -278,11 +275,8 @@ export default function About() {
               </div>
 
               {/* Interests */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.6 }}
-                className="bg-gradient-to-br from-gray-900 to-black rounded-2xl p-8 border border-white/10 shadow-xl"
+              <div
+                className="bg-gradient-to-br from-gray-900 to-black rounded-2xl p-8 border border-white/10 shadow-xl" data-aos='fade-up' data-aos-duration='600' data-aos-delay='400'
               >
                 <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
                   <Camera className="w-6 h-6" />
@@ -293,19 +287,21 @@ export default function About() {
                     <motion.div
                       whileHover={{ y: -5 }}
                       key={index}
-                      className="flex flex-col items-center p-4 rounded-xl bg-gray-800/50 border border-white/5 hover:border-cyan-400/30 transition-colors"
+                      className="group relative flex flex-col items-center p-4 rounded-xl bg-gray-800/50 border border-white/5 overflow-hidden"
                     >
-                      <interest.icon className="w-8 h-8 text-stone-50 mb-2" />
-                      <h4 className="text-white font-medium text-center">
+                      {/* Hover Sweep Effect */}
+                      <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 -translate-x-full group-hover:translate-x-full transition-all duration-700 pointer-events-none" />
+                      <interest.icon className="w-8 h-8 text-stone-50 mb-2 relative z-10" />
+                      <h4 className="text-white font-medium text-center relative z-10">
                         {interest.title}
                       </h4>
-                      <p className="text-gray-400 text-sm text-center">
+                      <p className="text-gray-400 text-sm text-center relative z-10">
                         {interest.subtitle}
                       </p>
                     </motion.div>
                   ))}
                 </div>
-              </motion.div>
+              </div>
             </div>
           </div>
         </div>

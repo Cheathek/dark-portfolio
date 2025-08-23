@@ -51,7 +51,7 @@ export function NavBar() {
   return (
     <>
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
-        ? 'bg-black/10 backdrop-blur-lg border-b border-white/20 shadow-2xl'
+        ? 'bg-black/10 backdrop-blur-md border-b border-slate-500 shadow-2xl'
         : 'bg-transparent'
         }`}>
         <div className="mx-auto px-4 sm:px-6 lg:px-32">
@@ -60,18 +60,16 @@ export function NavBar() {
             <div className="flex-1 flex items-center">
               <button
                 onClick={() => scrollToSection('hero')}
-                className="flex items-center space-x-3 text-white font-bold text-xl hover:text-cyan-300 transition-all duration-300 group"
-              >
-                <div className="relative w-8 h-8">
+                className="flex items-center space-x-3 text-white font-bold text-xl hover:text-cyan-300 transition-all duration-300 group">
+                <div className="relative w-36 h-20">
                   <img
-                    src="/favicon.png"
+                    src="/logo.png"
                     alt="Logo"
                     width={32}
                     height={32}
-                    className="w-full h-full object-contain group-hover:rotate-12 transition-transform duration-300 hover:transition-all"
+                    className="w-full h-full object-contain transform transition-transform duration-300 group-hover:scale-110"
                   />
                 </div>
-                <span className="hidden sm:block tracking-tighter">SOCHEATH</span>
               </button>
             </div>
 
@@ -84,8 +82,8 @@ export function NavBar() {
                       key={item.id}
                       onClick={() => scrollToSection(item.id)}
                       className={`relative px-4 py-2.5 text-sm font-medium transition-all duration-300 rounded-2xl group flex items-center ${activeSection === item.id
-                          ? 'text-white bg-gray-800'
-                          : 'text-gray-300 hover:text-white hover:bg-white/10'
+                        ? 'text-white bg-gray-800'
+                        : 'text-gray-300 hover:text-white hover:bg-white/10'
                         }`}
                     >
                       {item.icon && <item.icon className="h-4 w-4 mr-2" />}
@@ -104,15 +102,32 @@ export function NavBar() {
             </div>
 
             {/* Mobile Menu Button - Right Side */}
+
             <div className="lg:hidden flex-1 flex justify-end">
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="text-white hover:text-cyan-300 transition-colors p-2"
+                className="text-white hover:text-slate-300 transition-colors p-2"
               >
                 {isMobileMenuOpen ? (
-                  <X className="h-6 w-6" />
+                  <motion.div
+                    key="close"
+                    initial={{ rotate: -90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: 90, opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <X className="h-6 w-6" />
+                  </motion.div>
                 ) : (
-                  <Menu className="h-6 w-6" />
+                  <motion.div
+                    key="menu"
+                    initial={{ rotate: 90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: -90, opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <Menu className="h-6 w-6" />
+                  </motion.div>
                 )}
               </button>
             </div>

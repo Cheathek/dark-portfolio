@@ -8,13 +8,7 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
     port: 8080,
-    fs: {
-      allow: ["./client", "./shared"],
-      deny: [".env", ".env.*", "*.{crt,pem}", "**/.git/**", "server/**"],
-    },
-    allowedHosts: [
-      'sydney-offline-fiji-injury.trycloudflare.com',
-    ],
+    allowedHosts: ["sydney-offline-fiji-injury.trycloudflare.com"],
   },
   build: {
     outDir: "dist",
